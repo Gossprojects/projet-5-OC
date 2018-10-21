@@ -1,2 +1,0 @@
-<route url="index.php" action="showMessages"></route>
-<route url="index.php?talk=([0-9]+)" action="showConversation"></route>

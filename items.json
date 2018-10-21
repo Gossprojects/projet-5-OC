@@ -1,0 +1,24 @@
+{
+	"item" : [{
+		"name" : "copywriter",
+		"priceType" : "money",
+		"price" : 10,
+		"earnType" : "attention",
+		"earnTick" : 5,
+		"earnFreq" : 1000,
+		"consType" : "",
+		"consTick" : 0,
+		"consFreq" : 0
+	},
+	{
+		"name" : "adagent",
+		"priceType" : "money",
+		"price" : 25,
+		"earnType" : "attention",
+		"earnTick" : 5,
+		"earnFreq" : 1000,
+		"consType" : "",
+		"consTick" : 0,
+		"consFreq" : 0
+	}]
+}
