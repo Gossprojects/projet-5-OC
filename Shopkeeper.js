@@ -23,7 +23,7 @@ class Shopkeeper extends ApplicationComponent {
 		var contracts = [];
 		$.getJSON('contracts.json')
 			.done(function(data) {
-				$.each(data.item, function(item, val) {
+				$.each(data.contract, function(contract, val) {
 					contracts.push(val);
 				});
 			})
@@ -31,7 +31,7 @@ class Shopkeeper extends ApplicationComponent {
 				var err = textStatus + ", " + error;
 				console.log("Request failed: " + err);
 			});	
-		this.__contracts = contracts;	
+		this.__contracts = contracts;
 	}
 
 	// Creates chosen Employee, activates its earning & consuming intervals, stores it in Ledger
@@ -41,13 +41,16 @@ class Shopkeeper extends ApplicationComponent {
 		// JS object from JSON array
 		var employee = this.createEmployee(this.getItem(item, "employee"));
 
+		
 		// DYNAMIC ACTIVATION : two intervals stored in {employee}
 		// Earning interval
 		if(employee.earnType != "") {
 			var earnMethod = "increase" + employee.earnType.charAt(0).toUpperCase() + employee.earnType.substr(1);
 
 			employee.__earnInterval = setInterval(function() {
-				self.__app.__player[earnMethod](employee.earnTick);
+				//if(employee.hasResources === 0) {
+					self.__app.__player[earnMethod](employee.earnTick);
+				//}	
 			}, employee.earnFreq);	
 		}
 
@@ -56,9 +59,13 @@ class Shopkeeper extends ApplicationComponent {
 			var consMethod = "decrease" + employee.consType.charAt(0).toUpperCase() + employee.consType.substr(1);
 
 			employee.__consInterval = setInterval(function() {
-				self.__app.__player[consMethod](employee.consTick);
+				//if(employee.hasResources === 1) {
+					self.__app.__player[consMethod](employee.consTick);
+				//}
 			}, employee.consFreq);	
 		}
+
+		this.__app.__player.decreaseMoney(employee.price);
 
 		// Storing {employee} in {ledger}
 		this.__app.__ledger.activeItems.push(employee);
@@ -84,12 +91,22 @@ class Shopkeeper extends ApplicationComponent {
 
 	// Creates chosen Contract, takes price from player, gives outcome and returns UnlockID
 	sell(item) {
-		var contract = this.createContract(this.getItem(item), "contract");
-		var priceMethod = "decrease" + contract.priceType.charAt(0).toUpperCase() + contract.substr(1);
-		var outcomeMethod = "increase" + contract.outcomeType.charAt(0).toUpperCase() + contract.substr(1);
+		var contract = this.createContract(this.getItem(item, "contract"));
 
-		this.__app.__player[priceMethod](contract.price);
-		this.__app.__player[outcomeMethod](contract.price);
+		var priceMethod = "decrease" + contract.priceType.charAt(0).toUpperCase() + contract.priceType.substr(1);
+		var outcomeMethod = "increase" + contract.outcomeType.charAt(0).toUpperCase() + contract.outcomeType.substr(1);
+		
+		if(priceMethod != "decrease") {
+			// If a price type was defined (ie there is a price)
+			this.__app.__player[priceMethod](contract.price);
+		}
+
+		if(outcomeMethod != "increase") {
+			// If an outcome type was defined (ie there is an outcome)
+			this.__app.__player[outcomeMethod](contract.price);
+		}
+		
+		this.__app.__ledger.activePlaces.push(contract);
 
 		return contract.unlockId;
 	}
@@ -106,6 +123,7 @@ class Shopkeeper extends ApplicationComponent {
 		else if(type == "contract") {
 			for(var i = 0; i < this.__contracts.length; i++) {
 				if(this.__contracts[i].name == item) {
+		
 					return this.__contracts[i];
 				}
 			}
@@ -140,7 +158,7 @@ class Shopkeeper extends ApplicationComponent {
 										item.outcomeType,
 										item.outcome,
 										item.unlockId);
-			
+
 			return contract;
 		}
 	}

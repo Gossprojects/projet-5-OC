@@ -15,6 +15,7 @@ class Employee {
 
 		this.__earnInterval = null;
 		this.__consInterval = null;
+		this.__hasResources = null;
 	}
 
 	get name() {

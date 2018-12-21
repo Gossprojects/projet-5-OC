@@ -1,0 +1,50 @@
+#popupBlock {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 40%;
+    height: 100px;
+}
+
+.popup {
+    z-index: 1;
+    position: relative;
+    left: -50%;
+    text-align: center;
+    background: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    height: 100%;
+    box-shadow: 4px 4px;
+}
+
+#popupTxt {
+    position: relative;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.basicAction {
+    border: 1px solid black;
+    margin-bottom: 15px;
+    padding: 5px 5px;
+    max-width: 50px;
+    cursor: pointer;
+    
+}
+
+.block {
+    border: 1px solid black;
+    margin-bottom: 15px;
+    max-width: 150px;
+    padding: 5px 5px;
+}
+
+.block p {
+    text-decoration: underline;
+}
+
+.contract, .hire, .fire {
+    cursor: pointer;
+}

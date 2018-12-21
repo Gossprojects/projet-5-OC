@@ -1,22 +1,33 @@
 class UIController extends ApplicationComponent {
-
+	// USES JQUERY A LOT
 	constructor(app) {
 		
 		super(app);
 
-		// Layout
-		this.__attentionPtsElt = document.getElementById('attPts');
-		this.__moneyPtsElt = document.getElementById('moneyPts');
-		this.__reputationPtsElt = document.getElementById('repuPts');
+		// LAYOUT
+		this.__attentionPtsElt = $('#attPts')[0];
+		this.__moneyPtsElt = $('#moneyPts')[0];
+		this.__reputationPtsElt = $('#repuPts')[0];
 		
-		this.__hireBlock = document.getElementById('hireBlock');
+		this.__hireBlock = $('#hireBlock')[0];
 
-		// Action buttons 
-		// HIRE BTNS MUST BE NAME AS SUCH __hireName & BE SET IN init()
-		this.__hireCopywriter = document.getElementById('hireCopywriter');
-		
-		this.__actionPost = document.getElementById('actionPost');
-		this.__actionWork = document.getElementById('actionWork');
+		this.__copywriterNb = $('#copywriterBlock').find('.nb')[0];
+		this.__adagentNb = $('#adagentBlock').find('.nb')[0];
+
+		// ACTION BUTTONS
+		// PLACES BTNS ARE NAMED __unlockName & CALLED IN init() so events are set
+		this.__unlockNewsroom = $('#newsroom')[0];
+
+		// HIRE/FIRE UNLOCK BTNS ARE NAMED __hireEmployee/__fireEmployee & CALLED IN init() so events are set
+		this.__hireCopywriter = $('#copywriterBlock').find('.hire')[0];
+		this.__hireAdagent = $('#adagentBlock').find('.hire')[0];
+
+		this.__fireCopywriter = $('#copywriterBlock').find('.fire')[0];
+		this.__fireAdagent = $('#adagentBlock').find('.fire')[0];
+
+		// POST & WORK
+		this.__actionPost = $('#actionPost')[0];
+		this.__actionWork = $('#actionWork')[0];
 	}
 
 	init() {
@@ -29,44 +40,68 @@ class UIController extends ApplicationComponent {
 			self.__app.__gameController.work();
 		});
 
-		// will prob be a loop
+		// should be a loop
+		this.setUnlock('__unlockNewsroom');
+
 		this.setHire('__hireCopywriter');
-		// will also be a loop
-		this.hide('teamBlock');
+		this.setHire('__hireAdagent');
+
+		this.setFire('__fireCopywriter');
+		this.setFire('__fireAdagent');
+
+		// should also be a loop
+		this.hide('newsroomBlock');
 	}
 
+	popupShow() {
+		$('#popupBlock').html($('<div>', {
+			class: 'popup'
+		}));
+		$('.popup').html($('<p>', {
+			id: 'popupTxt'
+		}));
+		$('#popupTxt').append('Text');
+	}
+
+	popupDestroy() {
+		$('#popupBlock').html('');
+	}
+
+	// Links actions to DOM elts 
 	setHire(property) {
 		var self = this;
 		var empl = property.charAt(6).toLowerCase() + property.substr(7);
-
-		this[property].addEventListener('click', function() {
-			self.__app.__gameController.hire(empl);
-		});
-	}
-
-	setTeam() {
-		var ledgerNames = [];
-		var catalogNames = [];
-		for (var i = 0; i < this.__app.__ledger.activeItems.length; i++) {
-
+		
+		if(this[property]) {
+			this[property].addEventListener('click', function() {
+				self.__app.__gameController.hire(empl);
+			});
 		}
-		/*
-		for(var i = 0; i < this.__app.__shopkeeper.items.length; i++) {
-			// If a type of employee is currently active, show it as DOM elt
-			this.__app.__ledger.activeItems.find(
+	}
 
-			) if(this.__app.__shopkeeper.items[i].name)
+	setFire(property) {
+		var self = this;
+		var empl = property.charAt(6).toLowerCase() + property.substr(7);
+
+		if(this[property]) {
+			this[property].addEventListener('click', function() {
+				self.__app.__gameController.fire(empl);
+			});
 		}
-		if(this.__app.__ledger.activeItems) */
+	}
+	
+	setUnlock(property) {
+		var self = this;
+		var place = property.charAt(8).toLowerCase() + property.substr(9);
+		
+		if(this[property]) {
+			this[property].addEventListener('click', function() {
+				self.__app.__gameController.sell(place);
+			});
+		}
 	}
 
-	refresh() {
-		this.updateAttention();
-		this.updateMoney();
-		this.updateReputation();
-	}
-
-	// Show and hide based on ID of element as string. REQUIRES JQUERY
+	// Show and hide based on ID of element as string
 	show(elt) {
 		if(typeof elt === 'string') {
 			var id = "#" + elt;
@@ -80,6 +115,16 @@ class UIController extends ApplicationComponent {
 		}
 	}
 
+	// Values update (freq in EventController.init)
+	refresh() {
+		this.updateCopywriters();
+		this.updateAdagents();
+
+		this.updateAttention();
+		this.updateMoney();
+		this.updateReputation();
+	}
+
 	updateAttention() {
 		this.__attentionPtsElt.innerHTML = this.__app.__player.attention;
 	}
@@ -88,5 +133,12 @@ class UIController extends ApplicationComponent {
 	}
 	updateReputation() {
 		this.__reputationPtsElt.innerHTML = this.__app.__player.reputation;
+	}
+
+	updateCopywriters() {
+		this.__copywriterNb.innerHTML = this.__app.__player.copywriters;
+	}
+	updateAdagents() {
+		this.__adagentNb.innerHTML = this.__app.__player.adagents;
 	}
 }

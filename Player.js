@@ -4,9 +4,12 @@ class Player extends ApplicationComponent {
 
 		super(app);
 
-		this.__money = 0;
+		this.__money = 50;
 		this.__attention = 0;
 		this.__reputation = 0;
+
+		this.__copywriters = 0;
+		this.__adagents = 0;
 	}
 
 	// Operations on attention points
@@ -45,6 +48,22 @@ class Player extends ApplicationComponent {
 		}
 	}
 
+	// Hire/fire copywriter
+	plusCopywriter() {
+		this.__copywriters++;
+	}
+	minusCopywriter() {
+		this.__copywriters--;
+	}
+
+	// Hire/fire adagent
+	plusAdagent() {
+		this.__adagents++;
+	}
+	minusAdagent() {
+		this.__adagents--;
+	}
+
 	// Setters
 	set money(amount) {
 		if(Number.isInteger(amount))
@@ -55,8 +74,12 @@ class Player extends ApplicationComponent {
 			this.__attention = amount;
 	}
 	set reputation(amount) {
-		if(Number.isInteger(amout))
+		if(Number.isInteger(amount))
 			this.__reputation = amount;
+	}
+	set copywriters(amount) {
+		if(Number.isInteger(amount))
+			this.__copywriters = amount;
 	}
 
 	// Getters
@@ -68,5 +91,11 @@ class Player extends ApplicationComponent {
 	}
 	get reputation() {
 		return this.__reputation;
+	}
+	get copywriters() {
+		return this.__copywriters;
+	}
+	get adagents() {
+		return this.__adagents;
 	}
 }

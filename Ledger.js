@@ -6,10 +6,7 @@ class Ledger extends ApplicationComponent {
 
 		this.__player = player;
 		this.__activeItems = [];
-
-		// Placeholders
-		this.__lastEventID = -1;
-		this.__playerChoicesID = [];
+		this.__activePlaces = [];
 	}
 
 	activeItemsNames() {
@@ -27,29 +24,28 @@ class Ledger extends ApplicationComponent {
 		this.__activeItems = newArray;
 	}
 
+	set activePlaces(newArray) {
+		this.__activePlaces = newArray;
+	}
+
 	get player() {
 		return this.__player;
 	}
+
 	get activeItems() {
 		return this.__activeItems;
 	}
 
+	get activePlaces() {
+		return this.__activePlaces;
+	}
 
-	
 
-	// Ecrite pour stocker les propriétés de Player dynamiquement, plus nécessaire si on stocke {player}
+	// Ecrite pour stocker les propriétés de Player dynamiquement, plus nécessaire en stockant {player}
 	update(criteria) {
 		if(typeof criteria == 'string') {
 			var method = 'update' + criteria.charAt(0).toUpperCase() + criteria.substr(1);
 			this[method]();
 		}
-	}
-	// Placeholders
-	updateLastEventID() {
-
-	}
-
-	updatePlayerChoicesID() {
-
 	}
 }

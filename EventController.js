@@ -13,14 +13,21 @@ class EventController extends ApplicationComponent {
 
 			this.__refresh = setInterval(function() {
 				self.__app.__UIController.refresh();
-				self.hasTeam();
 			}, freq);
 		}
 	}
 
-	hasTeam() {
-		if(this.__app.__ledger.activeItems.length != 0) {
-			this.__app.__UIController.show('teamBlock');
+	// Is called whenever Player buys a contract
+	hasNewContract(id) {
+		if(Number.isInteger(id)) {
+			switch(id) {
+
+				case 1: // Newsroom
+
+				this.__app.__UIController.show('newsroomBlock');
+				break;
+			}
 		}
 	}
+
 }
