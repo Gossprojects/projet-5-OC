@@ -1,0 +1,62 @@
+<div>Time : <span id="time"></span></div>
+<button id="btn" onclick="printLine(10, 100, 2)">Post</button>
+
+<script src="timer.js"></script>
+
+<script>
+	var timerElt = document.getElementById('time');
+	var buttonElt = document.getElementById('btn');
+
+	function launchTimer(time) {
+		// time in secs
+		var timer = Object.create(Timer);
+
+		timer.init(0, 0, 0, time);
+		timer.start();
+
+		timerElt.innerHTML = timer.seconds;
+
+		return timer;
+	}
+
+	function updateTimer(timer) {
+		var freq = setInterval(function() {
+			if(timer.status != 'over') {
+				timerElt.innerHTML = timer.seconds;
+			}
+		}, 1000);
+	}
+	
+	function print(timeout) {
+		// timeout in secs
+		var self = setTimeout(function() {
+		console.log('line');
+		clearTimeout(self);
+		}, timeout * 1000);
+	}
+
+	function printLine(cld, chance, max) {
+		// cooldown in secs
+		// chance in % (1-100)
+		// max in nb of times a line can appear during interval
+
+		if(chance === 100) {
+			var min = 1;
+		}
+		else {
+			var min = 0;
+		}
+
+		var occurrences = Math.floor(Math.random() * max) + min;
+		console.log(occurrences);
+
+		for(var i = 1; i <= occurrences; i++) {
+			var isLine = Math.floor(Math.random() * 100);
+			if(isLine <= chance) {
+				var timeout = Math.random() * cld;
+				print(timeout);
+			}
+		}
+	}
+	
+</script>

@@ -1,65 +1,59 @@
 class GameController extends ApplicationComponent {
-
+	// USES JQUERY
 	constructor(app) {
+
 		super(app);
 	}
 
 	post() {
-		this.__app.__player.increaseAttention(1);
+		if(!$(this.__app.__UIController.post).hasClass("onCooldown")) {
+
+			// If post is not on cld, increase att by workStr and set cld
+			this.__app.__player.increaseAttention(this.__app.__player.__workStr);
+			this.__app.__player.workStr = this.__app.__player.workInit;
+			this.__app.__UIController.setCooldown(this.__app.__UIController.post, this.__app.__player.__postCld);
+
+			// Also print feedback in timeline
+			this.__app.__timeline.newLine(this.__app.__linesManager.getLineOf(this.__app.__eventController.currentLv));
+		}
 	}
 
 	work() {
-		this.__app.__player.increaseMoney(5)
-	}
+		if(!$(this.__app.__UIController.work).hasClass("onCooldown")) {
 
-	hire(empl) {
-		var emp = this.__app.__shopkeeper.getItem(empl, "employee");
-		var playerMethod = "plus" + emp.name.charAt(0).toUpperCase() + emp.name.substr(1);
-
-		if(emp && this.__app.__player.money >= emp.price) {
-
-			this.__app.__shopkeeper.activate(empl);
-			this.__app.__player[playerMethod](); // Registering new employee in {Player}
-		}
-		else
-			console.log('not enuf $');
-	}
-
-	fire(empl) {
-		var emp = this.__app.__ledger.activeItemsNames(empl);
-		var playerMethod = "minus" + empl.charAt(0).toUpperCase() + empl.substr(1);
-
-		if(emp) {
-			this.__app.__shopkeeper.deactivate(empl);
-			this.__app.__player[playerMethod](); // Deleting new employee from {Player}
+			this.__app.__player.__workStr = this.__app.__player.__workStr + this.__app.__player.__workMult;
 		}
 	}
 
-	sell(contract) {
-		var contr = this.__app.__shopkeeper.getItem(contract, 'contract');
-		if(this.__app.__player.money >= contr.price) {
-	
-			this.__app.__shopkeeper.sell(contract);
+	buy(item) {
+		var self = this;
 
-			this.__app.__EventController.hasNewContract(contr.unlockId);
-			
-			this.__app.__UIController.hide(contract);
+		for(var i = 0; i < this.__app.__shopController.__inShop.length; i++) {
+
+			if(item.name == this.__app.__shopController.__inShop[i].name) {
+			// if item is in shop
+				if(item.className === "modif") { 
+				// if item is Modifier, activate & store in inventory
+					this.__app.__shopController.activateModif(item);
+					this.__app.__player.inventory.push(item);
+				}
+				else if(item.className === "empl") {
+				// if item is employee, activate & store in inventory
+					this.__app.__shopController.activateEmployee(item);
+					this.__app.__player.inventory.push(item);
+				}
+				// if item has lines, activate them after low delay
+				if(item.hasLines) {
+					setTimeout(function() {
+						self.__app.__shopController.activateItemLines(item);
+					}, item.lowFreq * 1000);
+				}
+				// then delete from shop, check for new items & update UI
+				this.__app.__shopController.__inShop.splice(i, 1);
+				this.__app.__eventController.checkIfItem();
+				this.__app.__UIController.updateShop();
+			}
 		}
-		else
-			console.log('not enuf $');
-	}
-
-	// Placeholders
-	pause(app) {
-		console.log(app + ' paused');
-	}
-
-	resume(app) {
-		console.log(app + ' resumed');
-	}
-	
-	check(truc) {
-		console.log(truc);
-	}
+	} 
 }
 

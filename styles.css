@@ -1,50 +1,58 @@
-#popupBlock {
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    width: 40%;
-    height: 100px;
+.container-fluid {
+	position: relative;
+	user-select: none;
 }
 
-.popup {
-    z-index: 1;
-    position: relative;
-    left: -50%;
-    text-align: center;
-    background: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    height: 100%;
-    box-shadow: 4px 4px;
+#btnsWrap {
+	width: 150px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
-#popupTxt {
-    position: relative;
-    height: 100%;
-    vertical-align: middle;
+#ptsWrap {
+	margin: 25px 0;
 }
 
-.basicAction {
-    border: 1px solid black;
-    margin-bottom: 15px;
-    padding: 5px 5px;
-    max-width: 50px;
-    cursor: pointer;
-    
+#timeline {
+	margin: 25px 0;
+	max-width: 500px;
+	max-height: 600px;
 }
 
-.block {
-    border: 1px solid black;
-    margin-bottom: 15px;
-    max-width: 150px;
-    padding: 5px 5px;
+#shop {
+	position: absolute;
+	top: 15vh;
+	display: flex;
+	flex-direction: row;
+	height: 5vh;
+	width: 80%;
+	max-width: 500px;
+	padding: 0 15px;
 }
 
-.block p {
-    text-decoration: underline;
+.item {
+	text-decoration: underline;
+	cursor: pointer;
+	margin-right: 10px;
 }
 
-.contract, .hire, .fire {
-    cursor: pointer;
+.desc {
+	text-decoration: none;
+	border: 1px black solid;
+	padding: 0 3px;
+	position: relative;
+	left: 0;
+	top: 15px;
+}
+
+.actionBtn {
+	border: 1px black solid;
+	padding: 3px 3px;
+	cursor: pointer;
+}
+
+.onCooldown {
+	background-color: grey;
+	cursor: default;
 }

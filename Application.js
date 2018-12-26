@@ -3,28 +3,38 @@ class Application {
 	constructor() {
 		this.__gameController = new GameController(this);
 		this.__player = new Player(this);
-		this.__shopkeeper = new Shopkeeper(this);
-		this.__ledger = new Ledger(this, this.__player); // Ledger needs Player instance
 		this.__UIController = new UIController(this);
-		this.__EventController = new EventController(this);
+		this.__timeline = new Timeline(this);
+		this.__shopController = new ShopController(this);
+		this.__shopManager = new ShopManager(this);
+		this.__eventController = new EventController(this);
+		this.__linesManager = new LinesManager(this);
 	}
 
 	init() {
 		console.log('init');
+		this.__eventController.init(60); // framerate
 		this.__UIController.init();
-		this.__EventController.init(100);
+		this.__shopManager.init();
+		this.__linesManager.init();
 	}
 
-	get gameController() {
-		return this.__gameController;
-	}
 	get player() {
 		return this.__player;
 	}
-	get shopkeeper() {
-		return this.__shopkeeper;
+	get gameController() {
+		return this.__gameController;
 	}
-	get ledger() {
-		return this.__ledger;
+	get shopController() {
+		return this.__shopController;
+	}
+	get shopManager() {
+		return this.__shopManager;
+	}
+	get eventController() {
+		return this.__eventController;
+	}
+	get linesController() {
+		return this.__linesController;
 	}
 }

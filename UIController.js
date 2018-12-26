@@ -1,107 +1,136 @@
 class UIController extends ApplicationComponent {
-	// USES JQUERY A LOT
+	// Uses jQuery a lot
 	constructor(app) {
 		
 		super(app);
 
-		// LAYOUT
+		// NUMBERS
 		this.__attentionPtsElt = $('#attPts')[0];
 		this.__moneyPtsElt = $('#moneyPts')[0];
-		this.__reputationPtsElt = $('#repuPts')[0];
-		
-		this.__hireBlock = $('#hireBlock')[0];
+		this.__workStr = $('#workStr')[0];
 
-		this.__copywriterNb = $('#copywriterBlock').find('.nb')[0];
-		this.__adagentNb = $('#adagentBlock').find('.nb')[0];
+		// BUTTONS
+		this.__post = $('#post')[0];
+		this.__work = $('#work')[0];
 
-		// ACTION BUTTONS
-		// PLACES BTNS ARE NAMED __unlockName & CALLED IN init() so events are set
-		this.__unlockNewsroom = $('#newsroom')[0];
+		// TIMELINE
+		this.__timelineElt = $('#timeline')[0];
 
-		// HIRE/FIRE UNLOCK BTNS ARE NAMED __hireEmployee/__fireEmployee & CALLED IN init() so events are set
-		this.__hireCopywriter = $('#copywriterBlock').find('.hire')[0];
-		this.__hireAdagent = $('#adagentBlock').find('.hire')[0];
-
-		this.__fireCopywriter = $('#copywriterBlock').find('.fire')[0];
-		this.__fireAdagent = $('#adagentBlock').find('.fire')[0];
-
-		// POST & WORK
-		this.__actionPost = $('#actionPost')[0];
-		this.__actionWork = $('#actionWork')[0];
+		// SHOP
+		this.__shopElt = $('#shop')[0];
 	}
 
 	init() {
 		var self = this;
 
-		this.__actionPost.addEventListener('click', function() {
+		// Set up main btns actions
+		this.__post.addEventListener('click', function() {
 			self.__app.__gameController.post();
 		});
-		this.__actionWork.addEventListener('click', function() {
+		this.__work.addEventListener('click', function() {
 			self.__app.__gameController.work();
 		});
 
-		// should be a loop
-		this.setUnlock('__unlockNewsroom');
-
-		this.setHire('__hireCopywriter');
-		this.setHire('__hireAdagent');
-
-		this.setFire('__fireCopywriter');
-		this.setFire('__fireAdagent');
-
-		// should also be a loop
-		this.hide('newsroomBlock');
+		// Custom default layout
+		$(this.work).addClass("onCooldown");
 	}
 
-	popupShow() {
-		$('#popupBlock').html($('<div>', {
-			class: 'popup'
-		}));
-		$('.popup').html($('<p>', {
-			id: 'popupTxt'
-		}));
-		$('#popupTxt').append('Text');
-	}
+	setCooldown(elt, duration) {
 
-	popupDestroy() {
-		$('#popupBlock').html('');
-	}
+		if(elt instanceof Element) {
+			// If elt is a DOM element
 
-	// Links actions to DOM elts 
-	setHire(property) {
-		var self = this;
-		var empl = property.charAt(6).toLowerCase() + property.substr(7);
-		
-		if(this[property]) {
-			this[property].addEventListener('click', function() {
-				self.__app.__gameController.hire(empl);
-			});
+			duration = duration * 1000; // ms to secs
+
+			$(elt).addClass("onCooldown");
+
+			if(elt === this.post) {
+				// If setting cooldown on post, enable work
+				$(this.work).removeClass("onCooldown");
+			}
+
+			var cldwn = setInterval(function() {
+
+				duration = duration - 1000;
+
+				if(duration <= 0) {
+					clearInterval(cldwn);
+					$(elt).removeClass("onCooldown");
+
+					if(elt === this.post) {
+						// If cooldown over on post, disable work
+						$(this.work).addClass("onCooldown");
+					}
+				}
+			}, 1000);
 		}
 	}
 
-	setFire(property) {
-		var self = this;
-		var empl = property.charAt(6).toLowerCase() + property.substr(7);
+	// SHOP
+	updateShop() {
+		self = this;
+		self.__shopElt.innerHTML = '';
 
-		if(this[property]) {
-			this[property].addEventListener('click', function() {
-				self.__app.__gameController.fire(empl);
+		var items = this.__app.__shopController.inShop; // array of available items
+		items.forEach(function(item) {
+			// create item in DOM & activate buy button
+			var elt = document.createElement('div');
+			elt.id = item.name;
+			elt.textContent = item.name;
+			elt.classList.add('item');
+
+			// binds its description
+			var descElt = document.createElement('div');
+			descElt.textContent = item.desc;
+			descElt.classList.add('desc');
+
+
+			elt.addEventListener('click', function() {
+				self.__app.__gameController.buy(item);
 			});
-		}
+
+			// place item in shop div and its desc in item div
+			$(self.shopElt).append(elt);
+			$(elt).append(descElt);
+		});
+	}
+
+	// TIMELINE
+	updateTimeline() {
+		self = this;
+		self.__timelineElt.innerHTML = '';
+
+		// Get currently active lines array
+		var lines = this.__app.__timeline.onScreen;
+
+		// Put them in p and show them
+		lines.forEach(function(line) {
+			var elt = '<p>' + line + '</p>';
+			$(self.timelineElt).append(elt);
+		});
 	}
 	
-	setUnlock(property) {
-		var self = this;
-		var place = property.charAt(8).toLowerCase() + property.substr(9);
-		
-		if(this[property]) {
-			this[property].addEventListener('click', function() {
-				self.__app.__gameController.sell(place);
-			});
-		}
+	// POINTS
+	updateAttention() {
+		this.__attentionPtsElt.innerHTML = (this.__app.__player.attention).toFixed(1);
+	}
+	updateMoney() {
+		this.__moneyPtsElt.innerHTML = this.__app.__player.money;
+	}
+	updateWorkStr() {
+		this.__workStr.innerHTML = (this.__app.__player.workStr).toFixed(1);
+	}
+	
+	// UPDATE
+	update() {
+		this.updateAttention();
+		this.updateMoney();
+		this.updateWorkStr();
+
+		this.updateTimeline();
 	}
 
-	// Show and hide based on ID of element as string
+	// SHOW/HIDE ANY ELT
 	show(elt) {
 		if(typeof elt === 'string') {
 			var id = "#" + elt;
@@ -115,30 +144,28 @@ class UIController extends ApplicationComponent {
 		}
 	}
 
-	// Values update (freq in EventController.init)
-	refresh() {
-		this.updateCopywriters();
-		this.updateAdagents();
-
-		this.updateAttention();
-		this.updateMoney();
-		this.updateReputation();
+	// GETTERS
+	get attentionPtsElt() {
+		return this.__attentionPtsElt;
 	}
 
-	updateAttention() {
-		this.__attentionPtsElt.innerHTML = this.__app.__player.attention;
-	}
-	updateMoney() {
-		this.__moneyPtsElt.innerHTML = this.__app.__player.money;
-	}
-	updateReputation() {
-		this.__reputationPtsElt.innerHTML = this.__app.__player.reputation;
+	get moneyPtsElt() {
+		return this.__moneyPtsElt;
 	}
 
-	updateCopywriters() {
-		this.__copywriterNb.innerHTML = this.__app.__player.copywriters;
+	get timelineElt() {
+		return this.__timelineElt;
 	}
-	updateAdagents() {
-		this.__adagentNb.innerHTML = this.__app.__player.adagents;
+
+	get shopElt() {
+		return this.__shopElt;
+	}
+
+	get post() {
+		return this.__post;
+	}
+
+	get work() {
+		return this.__work;
 	}
 }
