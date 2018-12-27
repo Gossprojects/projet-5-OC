@@ -10,18 +10,19 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		<!-- Application Classes -->
-		<script src="Application.js"></script>
-		<script src="ApplicationComponent.js"></script>
-		<script src="Modifier.js"></script>
-		<script src="Employee.js"></script>
+		<script src="Game.js"></script>
+		<script src="GameComponent.js"></script>
+		<script src="Item.js"></script>
 		<script src="Player.js"></script>
 		<script src="GameController.js"></script>
-		<script src="Timeline.js"></script>
-		<script src="ShopController.js"></script>
-		<script src="ShopManager.js"></script>
-		<script src="UIController.js"></script>
 		<script src="EventController.js"></script>
+		<script src="EnergyManager.js"></script>
 		<script src="LinesManager.js"></script>
+		<script src="LinesController.js"></script>
+		<script src="ItemManager.js"></script>
+		<script src="ItemController.js"></script>
+		<script src="Timeline.js"></script>
+		<script src="UIController.js"></script>
 
 		<title>A game</title>
 	</head>
@@ -32,12 +33,14 @@
 				<div class="col-sm-2">
 					<div id="ptsWrap">
 						<div>Attention : <span id="attPts"></span></div>
-						<div>Money : $<span id="moneyPts"></span></div>
+						<div>Energy : <span id="nrjPts"></span></div>
+						
+						<div id="convert" class="actionBtn">Convert</div>
 					</div>
-
+					
 					<div id="btnsWrap">
-						<div id="post" class="actionBtn">Post</span></div>
-						<div id="work" class="actionBtn">Work : <span id="workStr"></div>
+						<div id="post" class="actionBtn">Post : <span id="workStr"></span></div>
+						<div id="work" class="actionBtn">Work</div>
 					</div>
 				</div> <!-- col -->
 
@@ -48,8 +51,19 @@
 			</div> <!-- row -->
 
 			<div class="row">
-				<div id="shop"></div>
+				<div class="col-sm-2">
+					<div id="shopWrap">
+						<div id="srch" class="actionBtn">Research <span id="srchPts"></span></div>
+						<div id="frmt" class="actionBtn">Format <span id="frmtPts"></span></div>
+						<div id="intcn" class="actionBtn">Interaction <span id="intcnPts"></span></div>
+					</div>
+				</div>
 			</div> <!-- row -->
+
+			<!-- SAVE WIP -->
+			<div class="row">
+				<div id="saveBtn" onclick="<?php  ?>">Save</div>
+			</div>
 
 		</div> <!-- container-fluid -->
 
@@ -60,12 +74,16 @@
 			crossorigin="anonymous">
 		</script>
 
-		<!-- Main script -->
-		<script id="mainScript">
-			var app = new Application();
-			app.init();
-			// modifier name, id, level, prev, valType, val, priceType, price, timer, mult, hasLines, lowFreq, highFreq
-			var test = new Modifier('test', 1, 1, false, false, false, false, false, false, false, true, 1, 5);
-		</script>
+		<?php
+			// php routing output :
+			if(isset($resume) {
+				// game init with cookie save
+				echo $resume;
+			})
+			else if(isset($menu) {
+				// start menu
+				echo $menu;
+			})
+		?>
 	</body>
 </html>

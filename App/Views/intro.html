@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Test de texte</title>
+    </head>
+    <body>
+        <div id='wrapper' style='width:350px;height:200px;border:1px solid black'>
+            <p id='text'></p>
+            <button id='link'>Next</button>
+        </div>
+    </body>
+</html>
+
+<script>
+// called from menu 'Start'
+// div with several pages and a 'next' button
+// NO PHP, client side only
+
+var texts = ['texte 1', 'texte 2', 'texte 3', 'texte 4', 'texte 5'];
+var wrapper = document.getElementById('wrapper');
+var text = document.getElementById('text');
+var link = document.getElementById('link');
+var i = 1;
+
+function toNextStep(index) {
+
+    text.innerHTML = '';
+    text.innerHTML = texts[index];
+
+    i++;
+    console.log(i);
+}
+
+function toEnding() {
+
+    wrapper.style.visibility = 'hidden';
+}
+
+text.textContent = texts[0];
+
+link.onclick = function() {
+
+    if(i < texts.length) {
+        toNextStep(i);
+    }
+    else {
+        toEnding();
+    }
+}
+
+
+
+</script>

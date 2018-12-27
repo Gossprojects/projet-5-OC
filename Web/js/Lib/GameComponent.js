@@ -1,4 +1,4 @@
-class ApplicationComponent {
+class GameComponent {
 
 	constructor(app) {
 		this.__app = app;

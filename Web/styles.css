@@ -4,10 +4,7 @@
 }
 
 #btnsWrap {
-	width: 150px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
+
 }
 
 #ptsWrap {
@@ -16,8 +13,10 @@
 
 #timeline {
 	margin: 25px 0;
+	height: 250px;
 	max-width: 500px;
-	max-height: 600px;
+	max-height: 250px;
+	overflow: hidden;
 }
 
 #shop {
@@ -55,4 +54,11 @@
 .onCooldown {
 	background-color: grey;
 	cursor: default;
+}
+
+#menuWrapper {
+	visibility: hidden;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
 }

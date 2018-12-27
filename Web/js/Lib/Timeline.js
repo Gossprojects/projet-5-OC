@@ -1,4 +1,4 @@
-class Timeline extends ApplicationComponent {
+class Timeline extends GameComponent {
 
 	constructor(app) {
 
@@ -8,7 +8,9 @@ class Timeline extends ApplicationComponent {
 	}
 
 	newLine(line) {	// string
-		this.__onScreen.unshift(line);
+		if(line) {
+			this.__onScreen.unshift(line);
+		}
 	}
 
 	get onScreen() {

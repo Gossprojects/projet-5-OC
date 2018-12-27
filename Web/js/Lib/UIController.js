@@ -1,4 +1,4 @@
-class UIController extends ApplicationComponent {
+class UIController extends GameComponent {
 	// Uses jQuery a lot
 	constructor(app) {
 		
@@ -6,18 +6,22 @@ class UIController extends ApplicationComponent {
 
 		// NUMBERS
 		this.__attentionPtsElt = $('#attPts')[0];
-		this.__moneyPtsElt = $('#moneyPts')[0];
+		this.__energyPtsElt = $('#nrjPts')[0];
 		this.__workStr = $('#workStr')[0];
+		this.__researchElt = $('#srchPts')[0];
+		this.__formatElt = $('#frmtElt')[0];
+		this.__interactionElt = $('#intcnElt')[0];
 
 		// BUTTONS
 		this.__post = $('#post')[0];
 		this.__work = $('#work')[0];
+		this.__convert = $('#convert')[0];
+		this.__researchBtn = $('#srch')[0];
+		this.__formatBtn = $('#frmt')[0];
+		this.__interactionBtn = $('#intcn')[0];
 
 		// TIMELINE
 		this.__timelineElt = $('#timeline')[0];
-
-		// SHOP
-		this.__shopElt = $('#shop')[0];
 	}
 
 	init() {
@@ -30,69 +34,69 @@ class UIController extends ApplicationComponent {
 		this.__work.addEventListener('click', function() {
 			self.__app.__gameController.work();
 		});
+		this.__convert.addEventListener('click', function() {
+			self.__app.__gameController.convert();
+		});
+
+		this.__researchBtn.addEventListener('click', function() {
+			self.__app.__gameController.buy('srch');
+		});
+		this.__formatBtn.addEventListener('click', function() {
+			self.__app.__gameController.buy('frmt');
+		});
+		this.__interactionBtn.addEventListener('click', function() {
+			self.__app.__gameController.buy('intcn');
+		});
 
 		// Custom default layout
 		$(this.work).addClass("onCooldown");
 	}
 
+	// POST/WORK
 	setCooldown(elt, duration) {
-
+		var self = this;
 		if(elt instanceof Element) {
 			// If elt is a DOM element
 
 			duration = duration * 1000; // ms to secs
 
-			$(elt).addClass("onCooldown");
+			// give it CSS class Cooldown
+			this.disable(elt);
 
 			if(elt === this.post) {
 				// If setting cooldown on post, enable work
-				$(this.work).removeClass("onCooldown");
+				this.enable(this.work);
 			}
 
 			var cldwn = setInterval(function() {
-
+				// Keep track of time
 				duration = duration - 1000;
-
+				// When over, enable elt
 				if(duration <= 0) {
 					clearInterval(cldwn);
-					$(elt).removeClass("onCooldown");
+					self.enable(elt);
 
 					if(elt === this.post) {
-						// If cooldown over on post, disable work
-						$(this.work).addClass("onCooldown");
+						// Disable work
+						self.disable(this.work);
 					}
 				}
 			}, 1000);
 		}
 	}
 
-	// SHOP
-	updateShop() {
-		self = this;
-		self.__shopElt.innerHTML = '';
+	disable(elt) {
+		if(elt instanceof Element) {
+		// If elt is a DOM element
+			$(elt).addClass("onCooldown");
+		}
+	}
 
-		var items = this.__app.__shopController.inShop; // array of available items
-		items.forEach(function(item) {
-			// create item in DOM & activate buy button
-			var elt = document.createElement('div');
-			elt.id = item.name;
-			elt.textContent = item.name;
-			elt.classList.add('item');
-
-			// binds its description
-			var descElt = document.createElement('div');
-			descElt.textContent = item.desc;
-			descElt.classList.add('desc');
-
-
-			elt.addEventListener('click', function() {
-				self.__app.__gameController.buy(item);
-			});
-
-			// place item in shop div and its desc in item div
-			$(self.shopElt).append(elt);
-			$(elt).append(descElt);
-		});
+	enable(elt) {
+		if(elt instanceof Element) {
+		// If elt is a DOM element
+			$(elt).removeClass("onCooldown");
+		}
 	}
 
 	// TIMELINE
@@ -112,19 +116,21 @@ class UIController extends ApplicationComponent {
 	
 	// POINTS
 	updateAttention() {
-		this.__attentionPtsElt.innerHTML = (this.__app.__player.attention).toFixed(1);
+		this.__attentionPtsElt.innerHTML = (this.__app.__player.attention).toFixed(0);
 	}
-	updateMoney() {
-		this.__moneyPtsElt.innerHTML = this.__app.__player.money;
+
+	updateEnergy() {
+		this.__energyPtsElt.innerHTML = this.__app.__player.energy;
 	}
+
 	updateWorkStr() {
-		this.__workStr.innerHTML = (this.__app.__player.workStr).toFixed(1);
+		this.__workStr.innerHTML = (this.__app.__player.workStr).toFixed(0);
 	}
 	
 	// UPDATE
 	update() {
 		this.updateAttention();
-		this.updateMoney();
+		this.updateEnergy();
 		this.updateWorkStr();
 
 		this.updateTimeline();
@@ -137,6 +143,7 @@ class UIController extends ApplicationComponent {
 			$(id).show();
 		}
 	}
+	
 	hide(elt) {
 		if(typeof elt === 'string') {
 			var id = "#" + elt;
@@ -149,8 +156,8 @@ class UIController extends ApplicationComponent {
 		return this.__attentionPtsElt;
 	}
 
-	get moneyPtsElt() {
-		return this.__moneyPtsElt;
+	get energyPtsElt() {
+		return this.__energyPtsElt;
 	}
 
 	get timelineElt() {
