@@ -1,0 +1,519 @@
+{
+  "newsLines": [
+    {
+      "lv": 1,
+      "line": "Attentat : un homme politique frôle la mort rue de l'Observatoire",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Aucun poisson industriel n'est pollué au mercure, selon une étude",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Le soleil donne instantanément le cancer, selon une étude",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Les étrangers volent votre argent et votre travail",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Les féculents ne font pas grossir",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Les jeux vidéo rendent violent, selon une majorité d'expert",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Les produits laitiers sont vos amis pour la vie",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Les vaccins, moins utiles que vous ne le pensez",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Un expert remarque des perturbations atmosphériques sur Mars",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Un verre de jus d'orange par jour est bon pour la santé",
+      "dmg": 1
+    },
+    {
+      "lv": 1,
+      "line": "Un verre de vin par jour est bon pour la santé",
+      "dmg": 1
+    },
+    {
+      "lv": 2,
+      "line": "[EXCLUSIF] Les armes de destruction massives du Pétrozakhstan prises en photo",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Arrêtez de croire que les impôts servent à quelque chose",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Ce célèbre lanceur d'alerte préparait en fait un complot terroriste",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Ce que les médias vous cachent sur cette affaire, par Jean-Marc Expert",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Le régime sans gluten est dangereux pour la santé",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Le taux d'homocide au plus haut depuis 45 ou 47 ans",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Les impôts sont un \"crime contre l'humanité\" doublé d'un génocide, selon cet expert",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Les vaccins, ce génocide organisé dont vous êtes victime",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Pétrozakhstan, ce pays qui menace l'ONU avec des armes de destruction massives",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Un expert affirme avoir aperçu un vaisseau extra-terrestre",
+      "dmg": 2
+    },
+    {
+      "lv": 2,
+      "line": "Vivez longtemps, buvez du lait !",
+      "dmg": 2
+    },
+    {
+      "lv": 3,
+      "line": "\"Tout sauf terrestre\" : cet OVNI pose problème aux experts",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Economie : arrêtez de croire que les banques ne pensent qu'à l'argent !",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Il n'y a jamais eu autant d'attaques terroristes dans le monde",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Les étrangers veulent prendre votre pays et repartir avec",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Les féculents doivent être mangés régulièrement et avec le sourire",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Les jeux vidéo transforment vos enfants en cochons de lait",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Les produits laitiers vous donnent de la force et doublent votre QI",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Oubliez ce qu'ils vous disent, écoutez plutôt ce qu'on dit",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Plateforme 70 : des essais nucléaires menés en secret par l'armée",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Sans crème solaire, une minute à la plage peut être fatale",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Sondage : contrairement à une idée reçue, 192% des riches payent leurs impôts",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Trois quarts des terroristes sont nés à l'étranger",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Un témoin entend des bruits étranges, possiblement extra-terrestres",
+      "dmg": 4
+    },
+    {
+      "lv": 3,
+      "line": "Une petite bouteille de Coca-Cola par jour est bonne pour la santé",
+      "dmg": 4
+    },
+    {
+      "lv": 4,
+      "line": "Ce challenger politique financé par les franc-maçons",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Ce plan préparé par l'armée vise à nous défendre contre les aliens",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Cette nuit, une attaque terroriste a eu lieu dans chaque ville et village du monde entier",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Entre cette poudre synthétique et des fruits frais, aucune différence",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "L'OVNI écrasé s'avère être un vaisseau extra-terrestre",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Ce régime sans gluten transforme les gens en fourmis",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Les jeux vidéo envoient vos enfants faire le djihad",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Les vaccins, pires que la peste et la bombe nucléaire",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Pas de cuisine, mais de sacrifice : images du couteau satanique porté par le président",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Sondage : 97% des pauvres sont très heureux comme ça",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Un homme politique confesse : \"les médias ont tué mes enfants et mangé mon chien\"",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Un toboggan en billets de banque, ce projet fou des ministres financé avec vos impôts",
+      "dmg": 6
+    },
+    {
+      "lv": 4,
+      "line": "Une femme politique confesse : \"les médias ont crevé mes deux yeux à l'aide d'une paille\"",
+      "dmg": 6
+    },
+    {
+      "lv": 5,
+      "line": "[VIDEO] Cette femme noire avoue que le racisme est utile",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Ce challenger politique vend lui même des organes d'enfants pour se financer",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Cinq fruits et légumes par jour, le mensonge qui vous fait pousser des carottes au cul",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Deuxième Guerre des Mondes : ces OVNI qui prouvent la menace extra-terrestre",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "En cas de victoire, cette femme politique annulera \"à tout jamais\" le sport et la bière",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "En cas de victoire, cette femme politique coupera vos pénis pour en faire \"une grande salade césar\"",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Il n'y a pas de sexisme, et les femmes sont trop bêtes pour s'en rendre compte",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "L'Elysée sert de base militaire à Hitler, qui vit encore",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "L'immigration fait échouer vos enfants à l'école",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "L'incroyable complot de Kraft Foods pour donner aux planètes des noms de sucreries",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Le Power Dollar, cette monnaie secrète des stars et des politiques",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Les jeux vidéo tuent au moins 4 innoncents chaque jour",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Les produits laitiers vous aident à trouver l'amour",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Les pyramides étaient carrées avant l'arrivée de la gauche au pouvoir",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Les pyramides étaient rondes avant l'arrivée de la droite au pouvoir",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Sondage : 98% des femmes admettent que l'inégalité salariale est justifiée",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Top 10 des pays qui détiennent secrètement des armes de destruction massives",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Votre pays a été vendu aux étrangers samedi dernier, au marché de Saint-Ouen",
+      "dmg": 8
+    },
+    {
+      "lv": 5,
+      "line": "Secrets minceur : Isabelle Beautiful boit du sang de chaton tous les matins",
+      "dmg": 8
+    },
+    {
+      "lv": 6,
+      "line": "\"Pas assez de chiffres\" dans notre langue pour écrire le salaire du président, selon un expert",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "[VIDEO] Cette femme noire récupère des scalps de blancs pour en faire des pancakes",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Astronomie : arrêtez de croire que les planètes existent",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Ces célébrités mortes en secret et remplacés par des clones",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Fuir sur la Lune, le plan de secours secret du gouvernement",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Il y a \"largement assez d'eau\" sur Mars pour tout le monde, selon un expert",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "L'immigration donne de l'urticaire génital et fait tomber vos ongles",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "La Zone 666, cet ilôt gouvernemental consacré aux rituels sataniques",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Le régime sans gluten rend violent et moche",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Le taux d'homicide dépasse les 100%",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Les jeux vidéo donnent le cancer et rendent stérile",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Les produits laitiers vous rendent plus fort que Wolverine",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Mars : c'est pour bientôt !",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Plus de 183 milliards de personnes présentes à ce meeting politique",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Quarante arabes détruisent cinq églises avec une formule de magie noire",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Si vous votez pour ce candidat vous avez 100% de chances d'attraper le diabète",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Sondage : 104% des humains favorables au nucléaire",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Top 10 des hommes avec qui cette femme politique a couché pour réussir",
+      "dmg": 10
+    },
+    {
+      "lv": 6,
+      "line": "Un million d'euros, le prix payé par les politiques pour un déjeuner au Fouquet's",
+      "dmg": 10
+    },
+    {
+      "lv": 7,
+      "line": "Après l'appartement et la voiture, un ministre reçoit un continent de fonction",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Cet acteur a mis enceinte sa propre fille, âgée de deux ans",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Les étrangers salissent vos murs et font des trous dans vos t-shirts",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Le taux d'homicide au plus haut depuis la Grèce Antique",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Plus de l'ensemble des terroristes sont nés à l'étranger",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Top 10 des démons invocables à l'aide d'un vaccin",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Ce dinosaure vivant, caché dans les sous-sols du gouvernement",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Dans deux mois, le président de la République violera lui même chacun de vos enfants",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "La terrible relation sexuelle du président de la République avec une mouette",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Le président de la République gagne plus d'argent que l'ensemble des humains réunis",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Loin d'être percée, la couche d'ozone serait en fait bien remplie",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Ni ronde, ni plate : selon un expert, la Terre aurait en fait la forme d'un iPhone",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Peau douce, apports en nutriments essentiels : les bienfaits cachés du pétrole",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Plus de 13 milliards de personnes présentes à ce meeting politique",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Révélation : cette femme politique est la fille de sa propre soeur",
+      "dmg": 12
+    },
+    {
+      "lv": 7,
+      "line": "Téléportation : la découverte du siècle",
+      "dmg": 12
+    }
+  ]
+}

@@ -4,13 +4,20 @@ class UIController extends GameComponent {
 		
 		super(app);
 
-		// NUMBERS
+		// STATS
 		this.__attentionPtsElt = $('#attPts')[0];
-		this.__energyPtsElt = $('#nrjPts')[0];
+
 		this.__workStr = $('#workStr')[0];
+		this.__workMax = $('#workMax')[0];
+
+		this.__convertPtsElt = $('#convertPts')[0];
+		this.__energyPtsElt = $('#nrjPts')[0];
+
+		this.__health = $('#health')[0];
+
 		this.__researchElt = $('#srchPts')[0];
-		this.__formatElt = $('#frmtElt')[0];
-		this.__interactionElt = $('#intcnElt')[0];
+		this.__formatElt = $('#frmtPts')[0];
+		this.__interactionElt = $('#intcnPts')[0];
 
 		// BUTTONS
 		this.__post = $('#post')[0];
@@ -20,36 +27,66 @@ class UIController extends GameComponent {
 		this.__formatBtn = $('#frmt')[0];
 		this.__interactionBtn = $('#intcn')[0];
 
+		this.__buttons = []; // all buttons
+
 		// TIMELINE
-		this.__timelineElt = $('#timeline')[0];
+		this.__timelineElt = $('.timeline')[0];
+
+		// TIMER
+		this.__minElt = $('#min')[0];
+		this.__secElt = $('#sec')[0];
 	}
 
 	init() {
+		// get all buttons elt in one array
+		this.__buttons.push(this.__post, this.__work, this.__convert, this.__researchBtn, this.__formatBtn, this.__interactionBtn);
+		this.setListeners();
+
+		// Custom default layout
+		this.disable(this.__work);
+		this.disable(this.__researchElt);
+		this.disable(this.__formatElt);
+		this.disable(this.__interactionElt);
+
+		// Convert goal
+		this.__convertPtsElt.innerHTML = this.__app.__eventController.levels[0];
+	}
+
+	setListeners() {
 		var self = this;
 
 		// Set up main btns actions
-		this.__post.addEventListener('click', function() {
+		$(this.__post).on('click', function() {
 			self.__app.__gameController.post();
 		});
-		this.__work.addEventListener('click', function() {
+		$(this.__work).on('click', function() {
 			self.__app.__gameController.work();
 		});
-		this.__convert.addEventListener('click', function() {
+		$(this.__convert).on('click', function() {
 			self.__app.__gameController.convert();
 		});
 
-		this.__researchBtn.addEventListener('click', function() {
+		$(this.__researchBtn).on('click', function() {
 			self.__app.__gameController.buy('srch');
 		});
-		this.__formatBtn.addEventListener('click', function() {
+		$(this.__formatBtn).on('click', function() {
 			self.__app.__gameController.buy('frmt');
 		});
-		this.__interactionBtn.addEventListener('click', function() {
+		$(this.__interactionBtn).on('click', function() {
 			self.__app.__gameController.buy('intcn');
 		});
+	}
 
-		// Custom default layout
-		$(this.work).addClass("onCooldown");
+	deleteListeners() {
+		var self = this;
+
+		this.__buttons.forEach(function(btn) {
+			$(btn).off('click');
+		});
+	}
+
+	endGame() {
+		this.__app.__endController.init();
 	}
 
 	// POST/WORK
@@ -121,18 +158,54 @@ class UIController extends GameComponent {
 
 	updateEnergy() {
 		this.__energyPtsElt.innerHTML = this.__app.__player.energy;
+
+		if(this.__app.__player.hasConverted) {
+
+			this.__convertPtsElt.innerHTML = this.__app.__eventController.levels[0];
+			this.__app.__player.hasConverted = false;
+		}
+		// we want to print point goal for current lv
+		// levels[] elts are sliced as the game goes
+		// therefore levels[0] is always the currentLv
 	}
 
-	updateWorkStr() {
+	updateWork() {
 		this.__workStr.innerHTML = (this.__app.__player.workStr).toFixed(0);
+		this.__workMax.innerHTML = this.__app.__player.workMax;
+	}
+
+	updateHealth() {
+		this.__health.innerHTML = this.__app.__player.health;
+	}
+
+	updateShop() {
+		this.__researchElt.innerHTML = this.__app.__player.srch;
+		this.__formatElt.innerHTML = this.__app.__player.frmt;
+		this.__interactionElt.innerHTML = this.__app.player.intcn;
+
+		if(this.__app.__player.energy > 0) {
+
+			this.enable(this.__researchElt);
+			this.enable(this.__formatElt);
+			this.enable(this.__interactionElt);
+		}
+	}
+
+	updateTimer() {
+		var sec = this.__app.__timer.sec;
+		var min = this.__app.__timer.min;
+		this.__secElt.innerHTML = (sec < 10 ? '0' : '') + sec;
+		this.__minElt.innerHTML = min; // we don't print 0X min but just X min to suggest you won't hold 10 min
 	}
 	
 	// UPDATE
 	update() {
 		this.updateAttention();
+		this.updateWork();
+		this.updateHealth();
+		this.updateShop();
 		this.updateEnergy();
-		this.updateWorkStr();
-
+		this.updateTimer();
 		this.updateTimeline();
 	}
 
@@ -160,6 +233,10 @@ class UIController extends GameComponent {
 		return this.__energyPtsElt;
 	}
 
+	get convertPtsElt() {
+		return this.__convertPts;
+	}
+
 	get timelineElt() {
 		return this.__timelineElt;
 	}
@@ -174,5 +251,17 @@ class UIController extends GameComponent {
 
 	get work() {
 		return this.__work;
+	}
+
+	get researchElt() {
+		return this.__researchElt;
+	}
+
+	get formatElt() {
+		return this.__formatElt;
+	}
+
+	get interactionElt() {
+		return this.__interactionElt;
 	}
 }

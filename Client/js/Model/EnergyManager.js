@@ -4,7 +4,7 @@ class EnergyManager extends GameComponent {
 
 		super(app);
 
-		this.__prices = [5, 10, 25, 50, 250, 500, 5000];
+		this.__prices = [3, 5, 10, 25, 50, 100, 200];
 	}
 
 	init() {

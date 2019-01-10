@@ -1,40 +1,35 @@
 <?php
 class Router extends Application {
 
-    protected $routes;
-
     public function __construct() {
 
-        parent::__construct();
-
-        $this->routes = [
-            (object) array('url' => '/', 'action' => 'launch'),
-            (object) array('url' => '/leaderboard.html', 'action' => 'leaderboard')
-        ];
+        $this->routes = [];
     }
 
     public function getRoutes() {
         
         // get all routes in JSON
 
-        foreach($this->routes as $route) {
-        // prepend config root URL to each URL
-            $route->url = $this->getConfig()->get('root').$route->url;
-        }
+        return $this->routes;
     }
 
     public function getActionOf($url) {
 
-        foreach($routes as $route) {
+        foreach($this->routes as $route) {
 
-            if($route->url == $url) {
+            if($this->match($url, $route->url)) {
                 
                 return $route->action;
             }
         }
     }
 
-    public function getRoutes() {
-        return $this->routes;
-    }
+    public function match($url, $routeURL) {
+
+		if (preg_match('`'.$url.'`', $routeURL, $matches)) {
+			return $matches;
+		}
+		else
+			return false;
+	}
 }

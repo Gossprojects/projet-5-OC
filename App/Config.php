@@ -7,8 +7,11 @@ class Config {
     public function __construct() {
 
         $this->vars = [
-            (object) array('var' => 'saveExpire', 'value' => 2592000),
-            (object) array('var' => 'root', 'value' => 'http://localhost/php/projet5')
+            (object) array('var' => 'root', 'value' => 'http://localhost/php/projet5_prod3/Client'),
+            (object) array('var' => 'host', 'value' => 'localhost'),
+            (object) array('var' => 'db_name', 'value' => 'projet5_oc'),
+            (object) array('var' => 'db_user', 'value' => 'root'),
+            (object) array('var' => 'db_pwd', 'value' => '')
         ];
     }
 
@@ -19,7 +22,7 @@ class Config {
 
     public function get($var) {
 
-        foreach($this->$vars as $data) {
+        foreach($this->vars as $data) {
         // loop through $this vars to get asked value
             if($data->var == $var) {
 

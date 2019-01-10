@@ -1,54 +1,66 @@
 <?php
 // namespace?
 
-class ApplicationController extends Application {
+class ApplicationController {
 
     public function __construct() {
-        
-        parent::__construct();
+
     }
 
     public function launch() {
 
-        if(isset($_COOKIE['gobgame'])) {
-        // if user has previous locally saved game
-
-            $userPlayer = $_COOKIE['gobgame'];
-            // will serve as hydrate obj in resume.php
-
-            ob_start();
-                include 'resume.php';
-            $resume = ob_get_clean();
-        }
-        else {
-        // if user has no previous saved game, set cookie & run Menu
-            $cookieExp = time() + $this->getConfig()->get('saveExpire');
-            $userSave = setcookie('gobgame', '', $cookieExp);
-            
-            ob_start();
-                include 'menu.php';
-            $menu = ob_get_clean();   
-        }
+        ob_start();
+            include __DIR__.'/Views/game.php';
+        $content = ob_get_clean();
 
         ob_start();
-            include 'game.php';
+            include __DIR__.'/Views/layout.php';
         return ob_get_clean();
     }
 
-    public function leaderboard() {
+    public function leaderboard($manager, $config) {
 
-        $ldbData = $this->getManager()->getLeaderboard();
+        $rawLdb = $manager->getLeaderboard();
+        $players = [];
 
-        include 'leaderboard.php';
+        foreach($rawLdb as $rawPlayer => $scores) {
 
-        // get leaderboard data from Manager
+            $player = array('name' => $scores['username'],
+                            'score' => $scores['userscore'],
+                            'time' => $scores['usertime'],
+                            'rawtime' => $scores['userrawtime']);
 
-        // generate leaderboard
+            array_push($players, $player);
+        }
+
+        usort($players, array($this, "timeSort"));
+
+        $config = $config;
+
+        ob_start();
+            include __DIR__.'/Views/leaderboard.php';
+        $content = ob_get_clean();
+
+        ob_start();        
+            include __DIR__.'/Views/layout.php';
+        return ob_get_clean();
+    }
+    
+    public function submitScore($manager) {
+
+        if(isset($_POST['userName']) && isset($_POST['userTime']) && isset($_POST['userScore']) && isset($_POST['userIntTime'])) {
+        // If game data exists...
+            $username = htmlspecialchars($_POST['userName']);
+        // ...and is not harmful, upload it to DB
+            $manager->submitScore($username, $_POST['userTime'], $_POST['userScore'], $_POST['userIntTime']);
+        }
+        // Then redirect to leaderboard page
+        header('Location: http://localhost/php/projet5_prod3/Client/leaderboard.php');
+        exit;
     }
 
-    public function save() {
-
-        // 
+    public function timeSort($a, $b) {
+    // comparison function used in usort() to sort player scores in leaderboard (DESCENDING ORDER)
+        return strcmp($b['rawtime'], $a['rawtime']);
     }
-
 }

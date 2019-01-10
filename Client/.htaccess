@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule ^send_score.php entryPoint.php?action=sendScore
+RewriteRule ^leaderboard.php entryPoint.php?action=leaderboard
+
+Options -Indexes

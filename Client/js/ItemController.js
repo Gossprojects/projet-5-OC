@@ -9,6 +9,7 @@ class ItemController extends GameComponent {
 		// receives item name as string, runs its effects on Player and records 1 use
 
 		var activeItem = this.getActive(item);
+		console.log({activeItem});
 
 		if(activeItem.operator === '+') {
 			this.__app.__player[activeItem.target] = this.__app.__player[activeItem.target] + activeItem.amount;
@@ -18,6 +19,9 @@ class ItemController extends GameComponent {
 		}
 		if(activeItem.operator === '*'){
 			this.__app.__player[activeItem.target] = this.__app.__player[activeItem.target] * activeItem.amount;
+		}
+		if(activeItem.operator === '/'){
+			this.__app.__player[activeItem.target] = this.__app.__player[activeItem.target] / activeItem.amount;
 		}
 
 		this.__app.__player[activeItem.name]++;

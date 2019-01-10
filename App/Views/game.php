@@ -1,89 +1,66 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<!-- mobile rendering & zooming --> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ALL GAME SCREENS ARE NAVIGATED THROUGH IN JS -->
+<!-- START SCREEN -->
+<div class="menuWrapper contentWrapper">
+    <div class="gameTitle">The Game</div>
+    <div class="menuBtn startBtn">Start</div>
+    <a class="menuBtn ldbBtn" href="leaderboard.php">Leaderboard</a>
+</div>
 
-		<!-- CSS -->
-		<link rel="stylesheet" href="styles.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- GAME SCREEN -->
+<div class="gameWrapper contentWrapper">
+    <div class="healthBar">Truth health : <span id="health"></span></div>
+    <div class="timer">
+        <span id="min"></span> : <span id="sec"></span>
+    </div>
 
-		<!-- Application Classes -->
-		<script src="Game.js"></script>
-		<script src="GameComponent.js"></script>
-		<script src="Item.js"></script>
-		<script src="Player.js"></script>
-		<script src="GameController.js"></script>
-		<script src="EventController.js"></script>
-		<script src="EnergyManager.js"></script>
-		<script src="LinesManager.js"></script>
-		<script src="LinesController.js"></script>
-		<script src="ItemManager.js"></script>
-		<script src="ItemController.js"></script>
-		<script src="Timeline.js"></script>
-		<script src="UIController.js"></script>
+    <div id="post" class="actionBtn">Post</span></div>
+    <div id="work" class="actionBtn">Work : <span id="workStr"></span>/<span id="workMax"></span></div>
 
-		<title>A game</title>
-	</head>
-	<body>
-		<div class="container-fluid">
-		
-			<div class="row">
-				<div class="col-sm-2">
-					<div id="ptsWrap">
-						<div>Attention : <span id="attPts"></span></div>
-						<div>Energy : <span id="nrjPts"></span></div>
-						
-						<div id="convert" class="actionBtn">Convert</div>
-					</div>
-					
-					<div id="btnsWrap">
-						<div id="post" class="actionBtn">Post : <span id="workStr"></span></div>
-						<div id="work" class="actionBtn">Work</div>
-					</div>
-				</div> <!-- col -->
+    
+    <div class="timeline"></div>	
 
-				<div class="col-sm-4">
-					<div id="timeline"></div>	
-				</div> <!-- col -->
+    <div id="convert" class="actionBtn">Convert : <span id="attPts"></span>/<span id="convertPts"></span></div>
+    <div id="nrj"><span id="nrjPts"></span><span> Energy</span></div>
+    <div id="srch" class="actionBtn">Research : <span id="srchPts"></span></div>
+    <div id="frmt" class="actionBtn">Format : <span id="frmtPts"></span></div>
+    <div id="intcn" class="actionBtn">Interaction : <span id="intcnPts"></span></div>
+</div>
 
-			</div> <!-- row -->
+<!-- GAME OVER SCREEN -->
+<div class="endWrapper contentWrapper">
+    <div class="gameOver">Game Over</div>
+    <div class="scoreWrapper">
+        <div class="playerTime">
+            <span>Time</span><span id="playerTime"></span>
+        </div>
+        <div class="playerAtt">
+            <span>Life healed</span><span id="playerAtt"></span>
+        </div>
+    </div>
+    <div class="endBtnsWrapper">
+        <div id="retry">Retry</div>
+        <div id="send">Send</div>
+    </div>
+</div>
 
-			<div class="row">
-				<div class="col-sm-2">
-					<div id="shopWrap">
-						<div id="srch" class="actionBtn">Research <span id="srchPts"></span></div>
-						<div id="frmt" class="actionBtn">Format <span id="frmtPts"></span></div>
-						<div id="intcn" class="actionBtn">Interaction <span id="intcnPts"></span></div>
-					</div>
-				</div>
-			</div> <!-- row -->
+<!-- SEND SCORE SCREEN -->
+<div class="submitWrapper contentWrapper">
+    <span class="scoreTimeText">Time</span> 
+    <span id="scoreTime"></span>
+    <span class="scoreAttText">Life healed</span>
+    <span id="scoreAtt"></span>
+    <form id="sendScore" method="POST" action="send_score.php">Enter username : <input type="text" name="userName" size="15"></form>
+    <div id="back">Back</div>
+    <div id="submit">Submit</div>
 
-			<!-- SAVE WIP -->
-			<div class="row">
-				<div id="saveBtn" onclick="<?php  ?>">Save</div>
-			</div>
+    <!-- Player scores (hidden, linked to <form>) -->
+    <input id="scoreTimeHidden" type="hidden" name="userTime" form="sendScore"> 
+    <input id="scoreAttHidden" type="hidden" name="userScore" form="sendScore">
+    <input id="scoreIntTimeHidden" type="hidden" name="userIntTime" form="sendScore">
+</div>
 
-		</div> <!-- container-fluid -->
-
-		<!-- jQuery for simplified AJAX & GET requests -->
-		<script
-			src="https://code.jquery.com/jquery-3.3.1.js"
-			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-			crossorigin="anonymous">
-		</script>
-
-		<?php
-			// php routing output :
-			if(isset($resume) {
-				// game init with cookie save
-				echo $resume;
-			})
-			else if(isset($menu) {
-				// start menu
-				echo $menu;
-			})
-		?>
-	</body>
-</html>
+<!-- GAME INSTANCE -->
+<script>
+    var game = new Game;
+    game.init();
+</script>

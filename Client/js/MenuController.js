@@ -5,7 +5,14 @@ class MenuController extends GameComponent {
 
         super(app);
 
-        this.__menuWrapper = '';
+        // START SCREEN
+
+		this.__startBtn = $('.startBtn')[0];
+		this.__leaderboardBtn = $('.ldbBtn')[0];
+		this.__menuWrapper = $('.menuWrapper')[0];
+        this.__gameWrapper = $('.gameWrapper')[0];
+        
+        // INTRO 
 
         this.__introWrapper = '';
         this.__introButton = '';
@@ -13,7 +20,21 @@ class MenuController extends GameComponent {
         this.__introTexts = ['texte 1', 'texte 2', 'texte 3', 'texte 4', 'texte 5']; // To be externalized
     }
 
-    toStart() {
+    init() {
+        var self = this;
+
+        $(self.__gameWrapper).css('display', 'none');
+
+		$(this.__startBtn).on('click', function() {
+
+            self.__app.start();
+			
+            $(self.__menuWrapper).css('display', 'none');
+            $(self.__gameWrapper).css('display', 'grid');
+        });
+    }
+
+    toGame() {
 
     }
 

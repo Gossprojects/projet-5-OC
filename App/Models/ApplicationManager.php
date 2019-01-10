@@ -1,25 +1,43 @@
 <?php
 // namespace?
 
-class ApplicationController extends Application {
+class ApplicationManager {
 
     public function __construct() {
 
-        parent::__construct();
+        $this->pdo = '';
     }
 
-    public function sendAll($id) {
+    public function init($servername, $dbname, $user, $pwd) {
 
-        // save all data in $id index of save DB table
+        try {
+            $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $user, $pwd);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        catch(PDOException $e) {
+            echo "Connection to database failed. " . $e->getMessage();
+        }
     }
 
-    public function getAll($id) {
-     
-        // get all data from $id index of save DB table
+    public function submitScore($name, $time, $score, $rawtime) {
+
+        $req = $this->pdo->prepare('INSERT INTO leaderboard SET username = :username, usertime = :usertime, userscore = :userscore, userrawtime = :userrawtime');
+
+        $req->bindValue(':username', $name);
+        $req->bindValue(':usertime', $time);
+        $req->bindValue(':userscore', $score);
+        $req->bindValue(':userrawtime', $rawtime);
+
+        $req->execute();
     }
 
     public function getLeaderboard() {
 
-        // get necessary data to generate leaderboard
+        $req = $this->pdo->prepare('SELECT username, usertime, userscore, userrawtime FROM leaderboard ORDER BY usertime DESC');
+        $req->execute();
+
+        $leaderboard = $req->fetchAll();
+        
+        return $leaderboard;
     }
 }

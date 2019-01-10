@@ -3,26 +3,34 @@ class Player extends GameComponent {
 // When game is saved, {Player} is parsed to JSON and stored in a cookie
 
 	constructor(app,
-		currentLv = 1,
-		workInit = 1,
-		workStr = 1,
+		health = 50,
+
+		workInit = 0,
+		workStr = 0,
 		workMult = 1,
 		workMax = 1,
 		workCount = 0,
-		postCld = 5,
+
+		postCld = 7,
+		currentLv = 1,
+
 		attention = 0,
+
 		energy = 0,
 		energySpent = 0,
 		energyEarned = 0,
+
 		srch = 0,
 		frmt = 0,
-		intctn = 0
+		intcn = 0,
+
+		hasConverted = false
 		) {
 
 		super(app);
 		
 		// STATS
-		this.__currentLv = currentLv;
+		this.__health = health;
 
 		this.__workInit = workInit; // work value after each Post
 		this.__workStr = workStr; // work value between each Post
@@ -31,6 +39,10 @@ class Player extends GameComponent {
 		this.__workCount = workCount; // Work nb between each Post
 
 		this.__postCld = postCld; // in secs
+
+		this.__currentLv = currentLv;
+
+		this.__hasConverted = hasConverted; // UI switch (see UIController.updateEnergy())
 
 		// RESSOURCES
 		this.__attention = attention; // earned by posting
@@ -41,39 +53,14 @@ class Player extends GameComponent {
 		// INVENTORY
 		this.__srch = srch; // research/format/interaction bought with energy
 		this.__frmt = frmt;
-		this.__intctn = intctn;
+		this.__intcn = intcn;
 	}
-
-	// Operations on attention points
-	increaseAttention(nb) {
-		if($.isNumeric(nb)) {
-			this.__attention = (this.__attention + nb);
-		}
-	}
-	decreaseAttention(nb) {
-		if($.isNumeric(nb)) {
-			this.__attention = (this.__attention - nb);
-		}
-	}
-
-	// Operations on energy points
-	increaseEnergy(nb) {
-		if($.isNumeric(nb)) {
-			this.__energy = (this.__energy + nb);
-		}
-	}
-	decreaseEnergy(nb) {
-		if($.isNumeric(nb)) {
-			this.__energy = (this.__energy - nb);
-		}
-	}
-
 
 	// STATS SETTERS
 
-	set currentLv(nb) {
+	set health(nb) {
 		if($.isNumeric(nb))
-			this.__currentLv = nb;
+			this.__health = nb;
 	}
 	set workInit(nb) {
 		if($.isNumeric(nb))
@@ -99,6 +86,14 @@ class Player extends GameComponent {
 	set postCld(nb) {
 		if($.isNumeric(nb))
 			this.__postCld = nb;
+	}
+
+	set currentLv(nb) {
+		if($.isNumeric(nb))
+			this.__currentLv = nb;
+	}
+	set hasConverted(state) {
+		this.__hasConverted = state;
 	}
 
 	// RESSOURCES SETTERS
@@ -130,17 +125,22 @@ class Player extends GameComponent {
 		if($.isNumeric(nb))
 			this.__frmt = nb;
 	}
-	set intctn(nb) {
+	set intcn(nb) {
 		if($.isNumeric(nb))
-			this.__intctn = nb;
+			this.__intcn = nb;
 	}
 
 
 	// STATS GETTERS
 
+	get health() {
+		return this.__health;
+	}
+
 	get currentLv() {
 		return this.__currentLv;
 	}
+
 	get workInit() {
 		return this.__workInit;
 	}
@@ -157,8 +157,19 @@ class Player extends GameComponent {
 		return this.__workCount;
 	}
 
+	get min() {
+		return this.__min;
+	}
+	get sec() {
+		return this.__sec;
+	}
+
 	get postCld() {
 		return this.__postCld;
+	}
+
+	get hasConverted() {
+		return this.__hasConverted;
 	}
 
 	// RESSOURCES GETTERS
@@ -184,7 +195,7 @@ class Player extends GameComponent {
 	get frmt() {
 		return this.__frmt;
 	}
-	get intctn() {
-		return this.__intctn;
+	get intcn() {
+		return this.__intcn;
 	}
 }
