@@ -21,9 +21,21 @@
 
     <div id="convert" class="actionBtn">Convert : <span id="attPts"></span>/<span id="convertPts"></span></div>
     <div id="nrj"><span id="nrjPts"></span><span> Energy</span></div>
-    <div id="srch" class="actionBtn">Research : <span id="srchPts"></span></div>
-    <div id="frmt" class="actionBtn">Format : <span id="frmtPts"></span></div>
-    <div id="intcn" class="actionBtn">Interaction : <span id="intcnPts"></span></div>
+    <div id="srch" class="actionBtn">
+        Research : <span id="srchPts"></span>
+        <br>
+        +<span id="srchDesc"></span> work
+    </div>
+    <div id="frmt" class="actionBtn">
+        Format : <span id="frmtPts"></span>
+        <br>
+        <span id="frmtDesc"></span>
+    </div>
+    <div id="intcn" class="actionBtn">
+        Interaction : <span id="intcnPts"></span>
+        <br>
+        -<span id="intcnDesc"></span> cooldown
+    </div>
 </div>
 
 <!-- GAME OVER SCREEN -->

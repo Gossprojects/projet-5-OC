@@ -12,6 +12,7 @@ class GameController extends GameComponent {
 
 			// Increase att and HP by workStr 
 			this.__app.__player.attention += this.__app.__player.__workStr;
+			this.__app.__player.totalAttention += this.__app.__player.__workStr;
 			this.__app.__player.health += this.__app.__player.__workStr;
 
 			// Reset Work
@@ -47,7 +48,7 @@ class GameController extends GameComponent {
 			this.__app.over = true;
 		}
 		console.log(dmg);
-		console.log(this.__app.__speed + ' sec/ /' + this.__app.__accRate + ' %');
+		console.log(this.__app.__player.__speed + ' sec/ /' + this.__app.__config.__accRate + ' %');
 	}
 
 	convert() { // Turn attention into energy (= passing a level)
@@ -81,9 +82,9 @@ class GameController extends GameComponent {
 
 			if(this.__app.__player.energy == 0) {
 			// If all energy is spend, put all buy buttons on cooldown
-				this.__app.__UIController.disable(this.__app.__UIController.researchElt);
-				this.__app.__UIController.disable(this.__app.__UIController.formatElt);
-				this.__app.__UIController.disable(this.__app.__UIController.interactionElt);
+				this.__app.__UIController.disable(this.__app.__UIController.researchBtn);
+				this.__app.__UIController.disable(this.__app.__UIController.formatBtn);
+				this.__app.__UIController.disable(this.__app.__UIController.interactionBtn);
 			}
 		}
 		else if(this.__app.__timeline.onScreen[0] != this.__app.__linesController.getGodLine('notEnoughEnergy')) {

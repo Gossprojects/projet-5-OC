@@ -19,10 +19,16 @@ class UIController extends GameComponent {
 		this.__formatElt = $('#frmtPts')[0];
 		this.__interactionElt = $('#intcnPts')[0];
 
+		this.__researchDesc = $('#srchDesc')[0];
+		this.__formatDesc = $('#frmtDesc')[0];
+		this.__interactionDesc = $('#intcnDesc')[0];
+
 		// BUTTONS
 		this.__post = $('#post')[0];
 		this.__work = $('#work')[0];
+
 		this.__convert = $('#convert')[0];
+
 		this.__researchBtn = $('#srch')[0];
 		this.__formatBtn = $('#frmt')[0];
 		this.__interactionBtn = $('#intcn')[0];
@@ -44,9 +50,9 @@ class UIController extends GameComponent {
 
 		// Custom default layout
 		this.disable(this.__work);
-		this.disable(this.__researchElt);
-		this.disable(this.__formatElt);
-		this.disable(this.__interactionElt);
+		this.disable(this.__researchBtn);
+		this.disable(this.__formatBtn);
+		this.disable(this.__interactionBtn);
 
 		// Convert goal
 		this.__convertPtsElt.innerHTML = this.__app.__eventController.levels[0];
@@ -83,6 +89,8 @@ class UIController extends GameComponent {
 		this.__buttons.forEach(function(btn) {
 			$(btn).off('click');
 		});
+
+		this.__buttons = [];
 	}
 
 	endGame() {
@@ -123,14 +131,14 @@ class UIController extends GameComponent {
 	}
 
 	disable(elt) {
-		if(elt instanceof Element) {
+		if(elt instanceof Element && !$(elt).hasClass('onCooldown')) {
 		// If elt is a DOM element
 			$(elt).addClass("onCooldown");
 		}
 	}
 
 	enable(elt) {
-		if(elt instanceof Element) {
+		if(elt instanceof Element && $(elt).hasClass('onCooldown')) {
 		// If elt is a DOM element
 			$(elt).removeClass("onCooldown");
 		}
@@ -157,6 +165,9 @@ class UIController extends GameComponent {
 	}
 
 	updateEnergy() {
+		// we want to print point goal for current lv
+		// levels[] elts are sliced as the game goes
+		// therefore levels[0] is always the currentLv
 		this.__energyPtsElt.innerHTML = this.__app.__player.energy;
 
 		if(this.__app.__player.hasConverted) {
@@ -164,9 +175,15 @@ class UIController extends GameComponent {
 			this.__convertPtsElt.innerHTML = this.__app.__eventController.levels[0];
 			this.__app.__player.hasConverted = false;
 		}
-		// we want to print point goal for current lv
-		// levels[] elts are sliced as the game goes
-		// therefore levels[0] is always the currentLv
+
+		// If player can convert, enable button, otherwise keep it on cooldown
+		if(this.__app.__player.attention >= this.__convertPtsElt.innerHTML) {
+
+			this.enable(this.__convert);
+		}
+		else {
+			this.disable(this.__convert);
+		}
 	}
 
 	updateWork() {
@@ -175,19 +192,24 @@ class UIController extends GameComponent {
 	}
 
 	updateHealth() {
-		this.__health.innerHTML = this.__app.__player.health;
+		this.__health.innerHTML = Math.round(this.__app.__player.health);
 	}
 
 	updateShop() {
+
 		this.__researchElt.innerHTML = this.__app.__player.srch;
 		this.__formatElt.innerHTML = this.__app.__player.frmt;
 		this.__interactionElt.innerHTML = this.__app.player.intcn;
 
+		this.__researchDesc.innerHTML = this.__app.__player.srch * this.__app.__itemController.getActive('srch').amount;
+		this.__formatDesc.innerHTML = this.__app.__player.fmrt * this.__app.__itemController.getActive('frmt').amount;
+		this.__interactionDesc.innerHTML = this.__app.__player.intcn * this.__app.__itemController.getActive('intcn').amount;
+
 		if(this.__app.__player.energy > 0) {
 
-			this.enable(this.__researchElt);
-			this.enable(this.__formatElt);
-			this.enable(this.__interactionElt);
+			this.enable(this.__researchBtn);
+			this.enable(this.__formatBtn);
+			this.enable(this.__interactionBtn);
 		}
 	}
 
@@ -253,15 +275,15 @@ class UIController extends GameComponent {
 		return this.__work;
 	}
 
-	get researchElt() {
-		return this.__researchElt;
+	get researchBtn() {
+		return this.__researchBtn;
 	}
 
-	get formatElt() {
-		return this.__formatElt;
+	get formatBtn() {
+		return this.__formatBtn;
 	}
 
-	get interactionElt() {
-		return this.__interactionElt;
+	get interactionBtn() {
+		return this.__interactionBtn;
 	}
 }

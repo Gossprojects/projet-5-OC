@@ -40,7 +40,7 @@ class EndController extends UIController {
         this.__playerTime.innerHTML = this.__scoreTime.innerHTML = this.__scoreTimeHidden.value = this.__app.__timer.min + ' : ' + this.__app.__timer.sec;
         // time is also saved as one integer (in secs) so scores are easily ranked
         this.__scoreInttimeHidden.value = this.__app.__timer.duration;
-        this.__playerAtt.innerHTML = this.__scoreAtt.innerHTML = this.__scoreAttHidden.value = this.__app.__player.attention;
+        this.__playerAtt.innerHTML = this.__scoreAtt.innerHTML = this.__scoreAttHidden.value = this.__app.__player.totalAttention;
 
         // bind buttons
         // Game Over screen : restart

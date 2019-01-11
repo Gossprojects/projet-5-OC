@@ -22,7 +22,7 @@ class EventController extends GameComponent {
 		// set first hit
 		this.__hitLoop = setTimeout(function() {
 			self.hit();
-		}, self.__app.speed * 1000);
+		}, self.__app.__player.speed * 1000);
 
 		// get energy JSON file
 		// turn JSON file into array & store it in this.__levels
@@ -34,17 +34,18 @@ class EventController extends GameComponent {
 		var lineObj = this.__app.__linesController.getNewsLine(this.__app.__player.currentLv);
 
 		this.__app.__timeline.newLine(lineObj.line);
-		this.__app.__gameController.hit(lineObj.dmg);
+		this.__app.__gameController.hit(this.__app.__player.currentDmg);
 		this.__app.__UIController.update();
 
 		if(!this.__app.over === true) {
 		// if game is not over, call this function again in game.speed seconds
 			self.__hitLoop = setTimeout(function() {
 				self.hit();
-			}, self.__app.speed * 1000);
+			}, self.__app.__player.speed * 1000);
 		}
 
-		this.__app.speed -= (this.__app.speed * this.__app.accRate);
+		this.__app.__player.speed -= (this.__app.__player.speed * this.__app.__config.accRate);
+		this.__app.__player.__currentDmg = this.__app.__player.__currentDmg * this.__app.__config.dmgRate;
 	}
 
 	update() {

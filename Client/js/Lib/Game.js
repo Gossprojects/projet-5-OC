@@ -3,9 +3,7 @@ class Game {
 	constructor() {
 		this.__over = false;
 
-		this.__speed = 12; // interval between each hit (secs)
-		this.__accRate = 0.05; // acceleration rate (%)
-
+		this.__config = new Config(this);
 		this.__player = new Player(this);
 		this.__gameController = new GameController(this);
 		this.__eventController = new EventController(this);
@@ -23,44 +21,49 @@ class Game {
 
 	init() {
 		console.log('init');
-		this.__menuController.init();
-		this.__linesManager.init();
+		// When JSON config is ready, config game
+		this.__config.init(this.configWhenReady);
+		
 		this.__itemManager.init();
 
-		this.__over = false;
-		this.__speed = 5; 
-		this.__accRate = 0.5;
+		// When JSON lines are ready (largest file), print start screen
+		this.__linesManager.init(this.linesWhenReady);
 	}
 
 	start() {
 		console.log('start');
 		this.__over = false;
-		this.__speed = 5; 
-		this.__accRate = 0.5;
 
-		this.__player = new Player(this);
-		this.__gameController = new GameController(this);
+		this.__player = new Player(this, this.__config.gameSpeed);
+	//	this.__gameController = new GameController(this);
 		this.__eventController = new EventController(this);
-		this.__linesController = new LinesController(this);
-		this.__itemController = new ItemController(this);
+	//	this.__linesController = new LinesController(this);
+	//	this.__itemController = new ItemController(this);
 		this.__timeline = new Timeline(this);
-		this.__UIController = new UIController(this);
-		this.__menuController = new MenuController(this);
-		this.__endController = new EndController(this);
-		this.__timer = new Timer();
+	//	this.__UIController = new UIController(this);
+	//	this.__menuController = new MenuController(this);
+	//	this.__endController = new EndController(this);
+	//	this.__timer = new Timer();
 
+		this.__eventController.init(this.__config.framerate);
 		this.__UIController.init();
-		this.__eventController.init(60); // 60ms = framerate
 		this.__timer.reset();
 		this.__timer.start();
 	}
 
+	configWhenReady(self) {
+		self.__player.__speed = self.__config.gameSpeed;
+	}
+
+	linesWhenReady(self) {
+		self.__menuController.init();
+	}
+
+	// SETTERS
+
 	set over(state) {
 		this.__over = state;
 	}
-	/**
-	 * @param {any} newSpeed
-	 */
 	set speed(newSpeed) {
 		if($.isNumeric(newSpeed))
 			this.__speed = newSpeed;		
@@ -69,6 +72,8 @@ class Game {
 		if($.isNumeric(newRate))
 			this.__accRate = newRate;
 	}
+
+	// GETTERS
 
 	get over() {
 		return this.__over;

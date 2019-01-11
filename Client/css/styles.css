@@ -33,7 +33,7 @@
 	width: 100%;
 }
 
-/* Center text buttons */
+/* Center text */
 .gameTitle, .menuBtn, .gameOver, #nrj, #retry, #send, #back, #submit, .scoreTimeText, #scoreTime, .scoreAttText, #scoreAtt, #sendScore, #menu, #retryFromLdb, .username, .score {
 	display: flex;
 	justify-content: center;
@@ -53,6 +53,9 @@
 .onCooldown {
 	background-color: grey;
 	cursor: default;
+}
+#post, #work, #srch, #frmt, #intcn, #convert {
+	line-height: 1.5em;
 }
 
 /* Reset <a> CSS */

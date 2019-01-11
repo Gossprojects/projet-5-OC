@@ -13,6 +13,7 @@
 		<!-- Library -->
 		<script src="js/Lib/Game.js"></script>
 		<script src="js/Lib/GameComponent.js"></script>
+		<script src="js/Lib/Config.js"></script>
 		<script src="js/Lib/Item.js"></script>
 		<script src="js/Lib/Player.js"></script>
 		<script src="js/Lib/Timeline.js"></script>

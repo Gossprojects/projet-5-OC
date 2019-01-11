@@ -1,8 +1,8 @@
 class Player extends GameComponent {
 // Stores every variable information about the current game
-// When game is saved, {Player} is parsed to JSON and stored in a cookie
 
 	constructor(app,
+		speed,
 		health = 50,
 
 		workInit = 0,
@@ -12,9 +12,12 @@ class Player extends GameComponent {
 		workCount = 0,
 
 		postCld = 7,
+
 		currentLv = 1,
+		currentDmg = 1,
 
 		attention = 0,
+		totalAttention = 0,
 
 		energy = 0,
 		energySpent = 0,
@@ -41,11 +44,15 @@ class Player extends GameComponent {
 		this.__postCld = postCld; // in secs
 
 		this.__currentLv = currentLv;
+		this.__currentDmg = currentDmg;
 
 		this.__hasConverted = hasConverted; // UI switch (see UIController.updateEnergy())
 
+		this.__speed = speed;
+
 		// RESSOURCES
-		this.__attention = attention; // earned by posting
+		this.__attention = attention; // earned by posting, reseted each level
+		this.__totalAttention = totalAttention; // w/o level reset
 		this.__energy = energy; // earned by converting attention
 		this.__energySpent = energySpent;
 		this.__energyEarned = energyEarned; // helps GameController tell price of energy Player converts
@@ -92,8 +99,19 @@ class Player extends GameComponent {
 		if($.isNumeric(nb))
 			this.__currentLv = nb;
 	}
+
+	set currentDmg(nb) {
+		if($.isNumeric(nb))
+			this.__currentDmg = nb;
+	}
+
 	set hasConverted(state) {
 		this.__hasConverted = state;
+	}
+
+	set speed(nb) {
+		if($.isNumeric(nb))
+			this.__speed = nb;
 	}
 
 	// RESSOURCES SETTERS
@@ -114,6 +132,10 @@ class Player extends GameComponent {
 		if($.isNumeric(nb))
 			this.__attention = nb;
 	}
+	set totalAttention(nb) {
+		if($.isNumeric(nb))
+			this.__totalAttention = nb;
+	}
 
 	// INVENTORY SETTERS
 
@@ -130,7 +152,6 @@ class Player extends GameComponent {
 			this.__intcn = nb;
 	}
 
-
 	// STATS GETTERS
 
 	get health() {
@@ -139,6 +160,9 @@ class Player extends GameComponent {
 
 	get currentLv() {
 		return this.__currentLv;
+	}
+	get currentDmg() {
+		return this.__currentDmg;
 	}
 
 	get workInit() {
@@ -172,6 +196,10 @@ class Player extends GameComponent {
 		return this.__hasConverted;
 	}
 
+	get speed() {
+		return this.__speed;
+	}
+
 	// RESSOURCES GETTERS
 
 	get energy() {
@@ -183,8 +211,12 @@ class Player extends GameComponent {
 	get energyEarned() {
 		return this.__energyEarned;
 	}
+
 	get attention() {
 		return this.__attention;
+	}
+	get totalAttention() {
+		return this.__totalAttention;
 	}
 
 	// INVENTORY GETTERS

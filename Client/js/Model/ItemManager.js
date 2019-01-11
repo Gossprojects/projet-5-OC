@@ -8,13 +8,28 @@ class ItemManager extends GameComponent {
 	}
 
 	init() {
-		this.getAll();
-		// JSONless WIP
-		var research = new Item('srch', 'workMax', '+', 3);
-		var format = new Item('frmt', 'workInit', '+', 2);
-		var interaction = new Item('intcn', 'postCld', '*', 0.6);
+		var self = this, research, format, interaction;
 
-		this.__items.push(research, format, interaction);
+		$.getJSON('json/items.json', function(items) {
+			
+			var srch = items['items'].find(function(item) {
+				return item.name == "srch";
+			});
+			research = new Item(srch.name, srch.target, srch.operator, srch.amount);
+			console.log(research);
+
+			var frmt = items['items'].find(function(item) {
+				return item.name == "frmt";
+			});
+			format = new Item(frmt.name, frmt.target, frmt.operator, frmt.amount);
+
+			var intcn = items['items'].find(function(item) {
+				return item.name == "intcn";
+			});
+			interaction = new Item(intcn.name, intcn.target, intcn.operator, intcn.amount);
+
+			self.__items.push(research, format, interaction);
+        });
 	}
 
 	get items() {
