@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "name": "srch",
+      "target": "workMax",
+      "operator": "+",
+      "amount": 1
+    },
+    {
+      "name": "frmt",
+      "target": "workMult",
+      "operator": "+",
+      "amount": 1
+    },
+    {
+      "name": "intcn",
+      "target": "postCld",
+      "operator": "*",
+      "amount": 0.6
+    }
+  ]
+}

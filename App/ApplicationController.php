@@ -1,13 +1,17 @@
 <?php
-// namespace?
+namespace App;
 
 class ApplicationController {
 
-    public function __construct() {
+    /**
+     * Includes game view, which runs client side JS game application
+     * Declare $config as global var so JS has access to root URL
+     * @param manager 
+     * @return false if output buffering isn't active
+     */
+    public function launch($manager, $config) {
 
-    }
-
-    public function launch() {
+        $config = $config;
 
         ob_start();
             include __DIR__.'/Views/game.php';
@@ -18,6 +22,12 @@ class ApplicationController {
         return ob_get_clean();
     }
 
+    /**
+     * Fetches leaderboard data from DB
+     * Delete all but the [ldbSize] first entries
+     * Declare data and config to enable JS access
+     * @return false if output buffering isn't active
+     */
     public function leaderboard($manager, $config) {
 
         $rawLdb = $manager->getLeaderboard();
@@ -26,14 +36,14 @@ class ApplicationController {
         foreach($rawLdb as $rawPlayer => $scores) {
 
             $player = array('name' => $scores['username'],
-                            'score' => $scores['userscore'],
+                            'att' => $scores['useratt'],
                             'time' => $scores['usertime'],
-                            'rawtime' => $scores['userrawtime']);
+                            'score' => $scores['userscore']);
 
             array_push($players, $player);
         }
 
-        usort($players, array($this, "timeSort"));
+        $players = array_slice($players, 0, $config->get('ldbSize'));
 
         $config = $config;
 
@@ -46,21 +56,33 @@ class ApplicationController {
         return ob_get_clean();
     }
     
-    public function submitScore($manager) {
+    /**
+     * Checks user form and submit data to DB
+     * Redirect to leaderboard
+     */
+    public function submitScore($manager, $config) {
 
-        if(isset($_POST['userName']) && isset($_POST['userTime']) && isset($_POST['userScore']) && isset($_POST['userIntTime'])) {
-        // If game data exists...
+        if(isset($_POST['userName']) && isset($_POST['userTime']) && isset($_POST['userAtt']) && isset($_POST['userScore'])) {
+
             $username = htmlspecialchars($_POST['userName']);
-        // ...and is not harmful, upload it to DB
-            $manager->submitScore($username, $_POST['userTime'], $_POST['userScore'], $_POST['userIntTime']);
+
+            $manager->submitScore($username, $_POST['userTime'], $_POST['userAtt'], $_POST['userScore']);
         }
-        // Then redirect to leaderboard page
-        header('Location: http://localhost/php/projet5_prod3/Client/leaderboard.php');
+
+        header('Location: '.$config->get('root').'leaderboard.php');
         exit;
     }
 
-    public function timeSort($a, $b) {
-    // comparison function used in usort() to sort player scores in leaderboard (DESCENDING ORDER)
-        return strcmp($b['rawtime'], $a['rawtime']);
+    public function redirect($error) {
+
+        $error = $error;
+
+        ob_start();
+            include __DIR__.'/Views/error.php';
+        $content = ob_get_clean();
+
+        ob_start();        
+            include __DIR__.'/Views/layout.php';
+        return ob_get_clean();       
     }
 }

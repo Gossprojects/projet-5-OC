@@ -1,0 +1,52 @@
+{
+  "levels": [
+    {
+      "lv": 1,
+      "accRate": 0.02,
+      "dmgRate": 1,
+      "goal": 3
+    },
+    {
+      "lv": 2,
+      "accRate": 0.05,
+      "dmgRate": 1,
+      "goal": 5
+    },
+    {
+      "lv": 3,
+      "accRate": 0.1,
+      "dmgRate": 1.02,
+      "goal": 7
+    },
+    {
+      "lv": 4,
+      "accRate": 0.12,
+      "dmgRate": 1.02,
+      "goal": 9
+    },
+    {
+      "lv": 5,
+      "accRate": 0.15,
+      "dmgRate": 1.02,
+      "goal": 12
+    },
+    {
+      "lv": 6,
+      "accRate": 0.2,
+      "dmgRate": 0.99,
+      "goal": 15
+    },
+    {
+      "lv": 7,
+      "accRate": 0.17,
+      "dmgRate": 0.99,
+      "goal": 20
+    },
+    {
+      "lv": 8,
+      "accRate": 0.15,
+      "dmgRate": 0.99,
+      "goal": 50
+    }
+  ]
+}

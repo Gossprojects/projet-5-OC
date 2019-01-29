@@ -1,27 +1,22 @@
 <!-- LEADERBOARD SCREEN -->
 <div class="ldbWrapper contentWrapper">
 
-	<!-- Content is generated in JS from data sent by PHP -->	
-
-	<div class="ldbButtons">
-		<a id="menu" href="<?php echo $config->get('root') . '/entryPoint.php'; ?>">Menu</a>
+	<div class="playerCol">
+		<span id=playerCol>Player</span>
+	</div>
+	<div class="scoreCol">
+		<span id="scoreCol">Score</span>
+	</div>
+	<div class="timeCol">
+		<span id="timeCol">Time</span>
 	</div>
 
-	<script>
-		var players = <?php echo json_encode($players); ?>;
-
-		for(var i = 0; i < players.length; i ++) {
-			var username = document.createElement('div');
-			var userscore = document.createElement('div');
-			var usertime = document.createElement('div');
-
-			username.innerHTML = players[i].name;
-			userscore.innerHTML = players[i].score;
-			usertime.innerHTML = players[i].time;
-
-			$('.ldbWrapper').append(username);
-			$('.ldbWrapper').append(userscore);
-			$('.ldbWrapper').append(usertime);
-		}
-	</script>
+	<a id="menu" href="<?php echo $config->get('root') . 'game.php'; ?>">Menu</a>
 </div>
+
+<script>
+	var players = <?php echo json_encode($players); ?>;
+	var game = new Game;
+
+	game.leaderboard(players);
+</script>

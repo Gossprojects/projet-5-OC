@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule ^send_score.php game.php?action=sendScore
+RewriteRule ^leaderboard.php game.php?action=leaderboard
+
+ErrorDocument 404 /App/Views/404.php

@@ -1,0 +1,24 @@
+{
+  "params": [
+    {
+      "var": "framerate",
+      "value": 60
+    },
+    {
+      "var": "initSpeed",
+      "value": 15
+    },
+    {
+      "var": "initDmg",
+      "value": 3
+    },
+    {
+      "var": "initHealth",
+      "value": 25
+    },
+    {
+      "var": "postCld",
+      "value": 9
+    }
+  ]
+}

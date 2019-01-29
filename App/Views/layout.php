@@ -28,15 +28,16 @@
 		<script src="js/LinesController.js"></script>
 		<script src="js/ItemController.js"></script>
 		<script src="js/EndController.js"></script>
-		<script src="js/IntroController.js"></script>
 		<script src="js/MenuController.js"></script>
+		<script src="js/LeaderboardController.js"></script>
 
 		<!-- Managers -->
-		<script src="js/Model/EnergyManager.js"></script>
+		<script src="js/Model/LevelsManager.js"></script>
 		<script src="js/Model/LinesManager.js"></script>
 		<script src="js/Model/ItemManager.js"></script>
+		<script src="js/Model/MenuManager.js"></script>
 
-		<title>A game</title>
+		<title>Sauver la vérité</title>
 	</head>
 	<body>
 		<div class="pageWrapper">

@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "url": "",
+      "action": "launch"
+    },
+    {
+      "url": "leaderboard.php",
+      "action": "leaderboard"
+    },
+    {
+      "url": "game.php",
+      "action": "launch"
+    },
+    {
+      "url": "send_score.php",
+      "action": "submitScore"
+    }
+  ]
+}

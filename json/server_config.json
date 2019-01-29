@@ -1,0 +1,28 @@
+{
+  "vars": [
+    {
+      "var": "host",
+      "value": "fullturtvodata.mysql.db"
+    },
+    {
+      "var": "db_name",
+      "value": "fullturtvodata"
+    },
+    {
+      "var": "db_user",
+      "value": "fullturtvodata"
+    },
+    {
+      "var": "db_pwd",
+      "value": "Taki17pa"
+    },
+    {
+      "var": "root",
+      "value": "http://fullturtle.com/sauverlaverite/"
+    },
+    {
+      "var": "ldbSize",
+      "value": 10
+    }
+  ]
+}

@@ -1,74 +1,81 @@
 <!-- ALL GAME SCREENS ARE NAVIGATED THROUGH IN JS -->
 <!-- START SCREEN -->
 <div class="menuWrapper contentWrapper">
-    <div class="gameTitle">The Game</div>
+    <h1 class="gameTitle">SAUVER LA VERITE</h1>
     <div class="menuBtn startBtn">Start</div>
     <a class="menuBtn ldbBtn" href="leaderboard.php">Leaderboard</a>
 </div>
 
+<!-- INTRO / TUTORIAL -->
+<div class="introWrapper contentWrapper">
+    <div class="introText"></div>
+    <div class="nextBtn"></div>
+</div>
+
 <!-- GAME SCREEN -->
 <div class="gameWrapper contentWrapper">
-    <div class="healthBar">Truth health : <span id="health"></span></div>
+    <div id="health">
+        <div class="healthDesc"><span id="healthDescTxt">Vérité</span><span id="heart">&hearts;</span></div><div class="healthBar"></div>
+    </div>
     <div class="timer">
-        <span id="min"></span> : <span id="sec"></span>
+    T. <span id="min"></span> : <span id="sec"></span>
     </div>
 
-    <div id="post" class="actionBtn">Post</span></div>
-    <div id="work" class="actionBtn">Work : <span id="workStr"></span>/<span id="workMax"></span></div>
+    <div class="timelineTitle">Les fake news</div>
+    <div class="timeline"></div>
 
-    
-    <div class="timeline"></div>	
+    <div class="damagePoint"></div>
 
-    <div id="convert" class="actionBtn">Convert : <span id="attPts"></span>/<span id="convertPts"></span></div>
-    <div id="nrj"><span id="nrjPts"></span><span> Energy</span></div>
+    <div class="playerTitle">Vous</div>
+
+    <div id="post" class="actionBtn">Poster</div>
+    <div id="work" class="actionBtn">Bosser <span id="workStr"></span>/<span id="workMax"></span></div>
+
+    <div id="convert" class="actionBtn">Offrir <span id="attPts"></span>/<span id="convertPts"></span></div>
+    <div id="nrj"><span id="nrjPts"></span><span> Energie</span></div>
     <div id="srch" class="actionBtn">
-        Research : <span id="srchPts"></span>
+        <span id="srchPts"></span> Recherche
         <br>
-        +<span id="srchDesc"></span> work
+        +<span id="srchDesc"></span> travail
     </div>
     <div id="frmt" class="actionBtn">
-        Format : <span id="frmtPts"></span>
+        <span id="frmtPts"></span> Format
         <br>
-        <span id="frmtDesc"></span>
+        x<span id="frmtDesc"></span> impact
     </div>
     <div id="intcn" class="actionBtn">
-        Interaction : <span id="intcnPts"></span>
+        <span id="intcnPts"></span> Loquacité
         <br>
-        -<span id="intcnDesc"></span> cooldown
+        -<span id="intcnDesc"></span>s cooldown
     </div>
 </div>
 
 <!-- GAME OVER SCREEN -->
 <div class="endWrapper contentWrapper">
     <div class="gameOver">Game Over</div>
-    <div class="scoreWrapper">
-        <div class="playerTime">
-            <span>Time</span><span id="playerTime"></span>
-        </div>
-        <div class="playerAtt">
-            <span>Life healed</span><span id="playerAtt"></span>
-        </div>
-    </div>
-    <div class="endBtnsWrapper">
-        <div id="retry">Retry</div>
-        <div id="send">Send</div>
-    </div>
+
+    <span id="playerTimeText">Temps</span><span id="playerTime"></span>
+
+    <span id="playerAttText">Attention</span><span id="playerAtt"></span>
+
+    <span id="playerScoreText">Score</span><span id="playerScore"></span>
+
+    <div id="retry">Renaitre</div>
+    <div id="send">Publier</div>
 </div>
 
 <!-- SEND SCORE SCREEN -->
 <div class="submitWrapper contentWrapper">
-    <span class="scoreTimeText">Time</span> 
-    <span id="scoreTime"></span>
-    <span class="scoreAttText">Life healed</span>
-    <span id="scoreAtt"></span>
-    <form id="sendScore" method="POST" action="send_score.php">Enter username : <input type="text" name="userName" size="15"></form>
-    <div id="back">Back</div>
-    <div id="submit">Submit</div>
+    <span class="scoreFinalText">Score</span>
+    <span id="scoreFinal"></span>
+    <form id="sendScore" method="POST" action="send_score.php">Pseudo : <input id="userName" type="text" name="userName" size="15"></form>
+    <div id="back">Retour</div>
+    <div id="submit">Publier</div>
 
     <!-- Player scores (hidden, linked to <form>) -->
     <input id="scoreTimeHidden" type="hidden" name="userTime" form="sendScore"> 
-    <input id="scoreAttHidden" type="hidden" name="userScore" form="sendScore">
-    <input id="scoreIntTimeHidden" type="hidden" name="userIntTime" form="sendScore">
+    <input id="scoreAttHidden" type="hidden" name="userAtt" form="sendScore">
+    <input id="scoreFinalHidden" type="hidden" name="userScore" form="sendScore">
 </div>
 
 <!-- GAME INSTANCE -->
